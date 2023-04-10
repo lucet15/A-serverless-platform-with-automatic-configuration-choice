@@ -1,0 +1,139 @@
+# ========================================================================
+# ========================================================================
+# ========================== Without Yaml files ==========================
+# ========================================================================
+# ========================================================================
+
+eksctl create cluster --name=openfaas-eks --nodes=2 --auto-kubeconfig --region=us-west-2
+
+export KUBECONFIG=~/.kube/eksctl/clusters/openfaas-eks
+
+kubectl apply -f https://raw.githubusercontent.com/openfaas/faas-netes/master/namespaces.yml
+
+helm repo add openfaas https://openfaas.github.io/faas-netes/
+
+helm upgrade openfaas --install openfaas/openfaas \
+    --namespace openfaas  \
+    --set functionNamespace=openfaas-fn \
+    --set serviceType=LoadBalancer --set gateway.replicas=2 \
+    --set queueWorker.replicas=2
+
+kubectl -n openfaas get deployments -l "release=openfaas, app=openfaas"
+
+PASSWORD=$(kubectl -n openfaas get secret basic-auth -o jsonpath="{.data.basic-auth-password}" | base64 --decode) && \
+echo "OpenFaaS admin password: $PASSWORD"
+
+export OPENFAAS_URL=http://127.0.0.1:8080
+
+kubectl port-forward -n openfaas svc/gateway 8080:8080 &
+
+echo -n $PASSWORD | faas-cli login -g $OPENFAAS_URL -u admin --password-stdin
+
+# ==========
+# Delete cluster
+
+kubectl delete svc --namespace=openfaas gateway-external
+
+eksctl delete cluster --name openfaas-eks
+
+# ==========
+# https://github.com/openfaas/faas-netes/blob/master/chart/openfaas/README.md
+# https://aws.amazon.com/pt/blogs/opensource/deploy-openfaas-aws-eks/
+
+
+
+# ========================================================================
+# ========================================================================
+# ========================== Without Yaml files ==========================
+# ========================================================================
+# ========================================================================
+
+eksctl create cluster -f cluster.yaml
+
+eksctl delete cluster -f cluster.yaml
+
+# Cluster.yaml
+
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: openfaas-eks
+  region: us-west-2
+
+nodeGroups:
+  - name: ng-1
+    instanceType: m5.large
+    desiredCapacity: 1
+    volumeSize: 20
+    labels: { role: m5.large }
+
+# http://mhausenblas.info/eksctl/usage/creating-and-managing-clusters/
+# https://eksctl.io/usage/managing-nodegroups/
+
+# ============================= Docker Image =============================
+
+# Create a dockerfile
+
+FROM node:latest
+WORKDIR /app
+RUN npm install express
+COPY app.js .
+CMD ["node", "app.js"]
+
+# Build container
+docker build -t lucet/example-app .
+
+# Docker login
+docker login
+
+# Push image
+docker push lucet/example-app
+
+
+# ============================= Deployment =============================
+# MUDAR PARA AS COISAS DO OPENFAAS
+
+# Create deployment.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: example-deployment
+ labels:
+   app: example-ap
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: example-app
+  template:
+    metadata:
+      labels:
+        app: example-app
+    spec:
+     containers:
+     - name: example-app
+       image: lucet/example-app
+       ports:
+       - containerPort: 80
+
+# Create service.yaml
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: example-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: example-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
+
+
+
+# https://www.clickittech.com/devops/kubernetes-on-aws/
