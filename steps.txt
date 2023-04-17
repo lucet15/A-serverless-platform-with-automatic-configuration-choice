@@ -44,7 +44,7 @@ eksctl delete cluster --name openfaas-eks
 
 # ========================================================================
 # ========================================================================
-# ========================== Without Yaml files ==========================
+# ========================== With Yaml files =============================
 # ========================================================================
 # ========================================================================
 
@@ -99,7 +99,7 @@ docker push lucet/example-app
 apiVersion: apps/v1
 kind: Deployment
 metadata:
- name: example-deployment
+ name: example
  labels:
    app: example-ap
 spec:
@@ -112,11 +112,23 @@ spec:
       labels:
         app: example-app
     spec:
-     containers:
-     - name: example-app
-       image: lucet/example-app
-       ports:
-       - containerPort: 80
+      containers:
+        - name: example-app
+          image: lucet/example-app
+          ports:
+          - containerPort: 80
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: node.kubernetes.io/instance-type
+                    operator: In
+                    values:
+                      - t2.medium
+
+
+kubectl create -f example-deployment.yaml
 
 # Create service.yaml
 
@@ -133,7 +145,7 @@ spec:
       port: 80
       targetPort: 80
 
-
+kubectl create -f example-service.yaml
 
 
 # https://www.clickittech.com/devops/kubernetes-on-aws/

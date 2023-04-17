@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: example
+ labels:
+   app: example-ap
+spec:
+  replicas: 1
+  selector:  
+    matchLabels:
+      app: example-app
+  template:
+    metadata:
+      labels:
+        app: example-app       
+    spec:
+      containers:
+        - name: example-app
+          image: lucet/example-app
+          ports:
+          - containerPort: 80
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: node.kubernetes.io/instance-type
+                    operator: In
+                    values:
+                      - t2.medium  

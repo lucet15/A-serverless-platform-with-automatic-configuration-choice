@@ -1,0 +1,28 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: openfaas-eks
+  region: us-west-2
+
+nodeGroups:
+  - name: ng-1
+    instanceType: m5.large
+    desiredCapacity: 2
+    volumeSize: 80
+
+  - name: ng-2
+    instanceType: t2.medium
+    desiredCapacity: 2
+    volumeSize: 80
+ 
+  - name: ng-3
+    instanceType: m5.large
+    desiredCapacity: 2
+    volumeSize: 80
+
+
+# http://mhausenblas.info/eksctl/usage/creating-and-managing-clusters/
+# https://eksctl.io/usage/managing-nodegroups/ 
+
+
