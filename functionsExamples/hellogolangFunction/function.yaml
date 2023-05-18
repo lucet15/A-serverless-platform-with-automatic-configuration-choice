@@ -10,8 +10,4 @@ functions:
     handler: ./hello-golang
     image: lucet/hello-golang
     constraints:
-      - "beta.kubernetes.io/instance-type=m5.large"
-    labels:
-      beta.kubernetes.io/instance-type: m5.large 
-    nodeSelector:
-      beta.kubernetes.io/instance-type: m5.large 
+      - "beta.kubernetes.io/instance-type=t3.small"
