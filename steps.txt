@@ -1,12 +1,37 @@
+ ========================================================================
+# ========================== Build image in M1  ==========================
+# ========================================================================
+
+export DOCKER_CLI_EXPERIMENTAL=enabled
+faas-cli publish -f hello-golang.yml --platforms linux/arm/v7
+(deploy...)
+
+
+faas-cli build -f function.yaml && faas-cli push -f function.yaml && faas-cli publish -f function.yaml  --platforms linux/arm/v7,linux/amd64 && faas-cli deploy -f function.yaml
+
+# ========================================================================
+# ========================== get instance type  ==========================
+# ========================================================================
+
+kubectl get nodes -o json|jq -Cjr '.items[] | .metadata.name," ",.metadata.labels."beta.kubernetes.io/instance-type"," ",.metadata.labels."beta.kubernetes.io/arch", "\n"'|sort -k3 -r
+
+(output)
+
+	ip-192-168-65-41.eu-west-2.compute.internal m5.large amd64
+	ip-192-168-44-137.eu-west-2.compute.internal m5.large amd64
+
 # ========================================================================
 # ========================================================================
-# ========================== Without Yaml files ==========================
+# =kubectl apply -f https://raw.githubusercontent.com/openfaas/faas-netes/master/namespaces.yml========================= Without Yaml files ==========================
 # ========================================================================
 # ========================================================================
 
-eksctl create cluster --name=openfaas-eks --nodes=2 --auto-kubeconfig --region=us-west-2
+eksctl create cluster --name=openfaas-eks --nodes=2 --auto-kubeconfig --region=eu-west-2
+
+aws eks update-kubeconfig --name openfaas-eks
 
 export KUBECONFIG=~/.kube/eksctl/clusters/openfaas-eks
+export KUBECONFIG=/etc/kubernetes/admin.conf or $HOME/.kube/config
 
 kubectl apply -f https://raw.githubusercontent.com/openfaas/faas-netes/master/namespaces.yml
 
@@ -15,13 +40,49 @@ helm repo add openfaas https://openfaas.github.io/faas-netes/
 helm upgrade openfaas --install openfaas/openfaas \
     --namespace openfaas  \
     --set functionNamespace=openfaas-fn \
-    --set serviceType=LoadBalancer --set gateway.replicas=2 \
+    --set serviceType=LoadBalancer \
+    --set basic_auth=true \
+    --set gateway.replicas=2 \
     --set queueWorker.replicas=2
+
+helm upgrade openfaas --install openfaas/openfaas \
+    --namespace openfaas  \
+    --set functionNamespace=openfaas-fn \
+    --set serviceType=LoadBalancer \
+    --set basic_auth=false \
+    --set gateway.replicas=2 \
+    --set queueWorker.replicas=2
+
+helm upgrade openfaas --install openfaas/openfaas \
+    --namespace openfaas  \
+    --set functionNamespace=openfaas-fn \
+    --set serviceType=LoadBalancer \
+    --set basic_auth=true \
+    --set operator.create=true \
+    --set gateway.replicas=2 \
+    --set queueWorker.replicas=2
+
+helm upgrade openfaas --install openfaas/openfaas \
+    --namespace openfaas  \
+    --set serviceType=LoadBalancer \
+    --set basic_auth=true \
+    --set gateway.replicas=2 \
+    --set queueWorker.replicas=2
+
+helm upgrade openfaas --install openfaas/openfaas \
+    --namespace openfaas  \
+    --set functionNamespace=openfaas-fn \
+    --set serviceType=LoadBalancer \
+    --set basic_auth=true \
+    --set operator.create=true
 
 kubectl -n openfaas get deployments -l "release=openfaas, app=openfaas"
 
 PASSWORD=$(kubectl -n openfaas get secret basic-auth -o jsonpath="{.data.basic-auth-password}" | base64 --decode) && \
 echo "OpenFaaS admin password: $PASSWORD"
+
+export OPENFAAS_URL=$(kubectl get svc -n openfaas gateway-external -o  jsonpath='{.status.loadBalancer.ingress[*].hostname}'):8080  \
+&& echo Your gateway URL is: $OPENFAAS_URL
 
 export OPENFAAS_URL=http://127.0.0.1:8080
 
@@ -66,10 +127,29 @@ nodeGroups:
     instanceType: m5.large
     desiredCapacity: 1
     volumeSize: 20
-    labels: { role: m5.large }
+    tags:
+      instance-type: t3.medium
 
 # http://mhausenblas.info/eksctl/usage/creating-and-managing-clusters/
 # https://eksctl.io/usage/managing-nodegroups/
+
+# Add a node group to the cluster
+
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: openfaas
+  region: eu-west-2
+managedNodeGroups:
+- name: ng-2
+  instanceType: m5.large
+  desiredCapacity: 2
+  volumeSize: 20
+  tags:
+    instance-type: m5.large
+
+eksctl create nodegroup -f eks-nodegroup.yaml
+
 
 # ============================= Docker Image =============================
 
@@ -88,7 +168,7 @@ docker build -t lucet/example-app .
 docker login
 
 # Push image
-docker push lucet/example-app
+docker push lucet/example-apeksctl create nodegroup -f eks-nodegroup.yamlp
 
 
 # ============================= Deployment =============================

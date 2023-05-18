@@ -1,0 +1,10 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://a93f4f5d5b95b4abb9d41c584eb93580-2100412408.eu-west-2.elb.amazonaws.com:8080
+functions:
+  hello-golang:
+    lang: go
+    handler: ./hello-golang
+    image: lucet/hello-golang:latest
+

@@ -1,0 +1,13 @@
+---
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: openfaas-eks
+  region: eu-west-2
+managedNodeGroups:
+  - name: ng-2
+    instanceType: m5.large
+    desiredCapacity: 2
+    volumeSize: 20
+    labels:
+      beta.kubernetes.io/instance-type: m5.large

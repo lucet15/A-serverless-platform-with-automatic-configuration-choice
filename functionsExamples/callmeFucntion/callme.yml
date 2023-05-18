@@ -1,0 +1,10 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://a4889ca3d959c44aba6564c6c4c3b3b8-988120032.us-west-2.elb.amazonaws.com:8080
+functions:
+  callme:
+    lang: node
+    handler: ./callme
+    image: lucet/callme:latest
+
