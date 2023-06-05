@@ -1,0 +1,151 @@
+benchmark,data name,performance,config
+openfaas-ocr,image-1,1.0505,Single model-based
+openfaas-ocr,image-1,0.99905,Specific model-based
+openfaas-ocr,image-1,0.99905,Best
+openfaas-ocr,image-2,1.541,Single model-based
+openfaas-ocr,image-2,1.79865,Specific model-based
+openfaas-ocr,image-2,1.541,Best
+openfaas-ocr,image-3,1.1448,Single model-based
+openfaas-ocr,image-3,0.9215,Specific model-based
+openfaas-ocr,image-3,0.9197500000000001,Best
+openfaas-ocr,image-4,1.5099,Single model-based
+openfaas-ocr,image-4,1.4663,Specific model-based
+openfaas-ocr,image-4,1.3745,Best
+openfaas-ocr,image-5,1.2286,Single model-based
+openfaas-ocr,image-5,0.9185000000000001,Specific model-based
+openfaas-ocr,image-5,0.9142,Best
+openfaas-ocr,image-1,1.0034,Single model-based
+openfaas-ocr,image-1,1.03945,Specific model-based
+openfaas-ocr,image-1,0.99905,Best
+openfaas-ocr,image-2,1.57015,Single model-based
+openfaas-ocr,image-2,1.541,Specific model-based
+openfaas-ocr,image-2,1.541,Best
+openfaas-ocr,image-3,1.04715,Single model-based
+openfaas-ocr,image-3,0.9197500000000001,Specific model-based
+openfaas-ocr,image-3,0.9197500000000001,Best
+openfaas-ocr,image-4,1.51545,Single model-based
+openfaas-ocr,image-4,1.41985,Specific model-based
+openfaas-ocr,image-4,1.3745,Best
+openfaas-ocr,image-5,1.1033,Single model-based
+openfaas-ocr,image-5,1.01585,Specific model-based
+openfaas-ocr,image-5,0.9142,Best
+openfaas-ocr,image-1,1.0034,Single model-based
+openfaas-ocr,image-1,0.99905,Specific model-based
+openfaas-ocr,image-1,0.99905,Best
+openfaas-ocr,image-2,1.57015,Single model-based
+openfaas-ocr,image-2,1.541,Specific model-based
+openfaas-ocr,image-2,1.541,Best
+openfaas-ocr,image-3,1.04715,Single model-based
+openfaas-ocr,image-3,0.9215,Specific model-based
+openfaas-ocr,image-3,0.9197500000000001,Best
+openfaas-ocr,image-4,1.51545,Single model-based
+openfaas-ocr,image-4,1.3745,Specific model-based
+openfaas-ocr,image-4,1.3745,Best
+openfaas-ocr,image-5,1.1033,Single model-based
+openfaas-ocr,image-5,0.9323,Specific model-based
+openfaas-ocr,image-5,0.9142,Best
+openfaas-ocr,image-1,1.0505,Single model-based
+openfaas-ocr,image-1,0.99905,Specific model-based
+openfaas-ocr,image-1,0.99905,Best
+openfaas-ocr,image-2,1.541,Single model-based
+openfaas-ocr,image-2,1.541,Specific model-based
+openfaas-ocr,image-2,1.541,Best
+openfaas-ocr,image-3,1.1448,Single model-based
+openfaas-ocr,image-3,0.9215,Specific model-based
+openfaas-ocr,image-3,0.9197500000000001,Best
+openfaas-ocr,image-4,1.5099,Single model-based
+openfaas-ocr,image-4,1.3745,Specific model-based
+openfaas-ocr,image-4,1.3745,Best
+openfaas-ocr,image-5,1.2286,Single model-based
+openfaas-ocr,image-5,0.9142,Specific model-based
+openfaas-ocr,image-5,0.9142,Best
+openfaas-ocr,image-1,1.0505,Single model-based
+openfaas-ocr,image-1,0.99905,Specific model-based
+openfaas-ocr,image-1,0.99905,Best
+openfaas-ocr,image-2,1.541,Single model-based
+openfaas-ocr,image-2,1.541,Specific model-based
+openfaas-ocr,image-2,1.541,Best
+openfaas-ocr,image-3,1.1448,Single model-based
+openfaas-ocr,image-3,0.9197500000000001,Specific model-based
+openfaas-ocr,image-3,0.9197500000000001,Best
+openfaas-ocr,image-4,1.5099,Single model-based
+openfaas-ocr,image-4,1.41985,Specific model-based
+openfaas-ocr,image-4,1.3745,Best
+openfaas-ocr,image-5,1.2286,Single model-based
+openfaas-ocr,image-5,0.9185000000000001,Specific model-based
+openfaas-ocr,image-5,0.9142,Best
+openfaas-ocr,image-1,1.0034,Single model-based
+openfaas-ocr,image-1,0.99905,Specific model-based
+openfaas-ocr,image-1,0.99905,Best
+openfaas-ocr,image-2,1.57015,Single model-based
+openfaas-ocr,image-2,1.541,Specific model-based
+openfaas-ocr,image-2,1.541,Best
+openfaas-ocr,image-3,1.04715,Single model-based
+openfaas-ocr,image-3,0.9215,Specific model-based
+openfaas-ocr,image-3,0.9197500000000001,Best
+openfaas-ocr,image-4,1.51545,Single model-based
+openfaas-ocr,image-4,1.3745,Specific model-based
+openfaas-ocr,image-4,1.3745,Best
+openfaas-ocr,image-5,1.1033,Single model-based
+openfaas-ocr,image-5,1.00155,Specific model-based
+openfaas-ocr,image-5,0.9142,Best
+openfaas-ocr,image-1,1.0034,Single model-based
+openfaas-ocr,image-1,0.99905,Specific model-based
+openfaas-ocr,image-1,0.99905,Best
+openfaas-ocr,image-2,1.57015,Single model-based
+openfaas-ocr,image-2,1.541,Specific model-based
+openfaas-ocr,image-2,1.541,Best
+openfaas-ocr,image-3,1.04715,Single model-based
+openfaas-ocr,image-3,0.9215,Specific model-based
+openfaas-ocr,image-3,0.9197500000000001,Best
+openfaas-ocr,image-4,1.51545,Single model-based
+openfaas-ocr,image-4,1.4663,Specific model-based
+openfaas-ocr,image-4,1.3745,Best
+openfaas-ocr,image-5,1.1033,Single model-based
+openfaas-ocr,image-5,0.9142,Specific model-based
+openfaas-ocr,image-5,0.9142,Best
+openfaas-ocr,image-1,1.0505,Single model-based
+openfaas-ocr,image-1,0.99905,Specific model-based
+openfaas-ocr,image-1,0.99905,Best
+openfaas-ocr,image-2,1.541,Single model-based
+openfaas-ocr,image-2,1.541,Specific model-based
+openfaas-ocr,image-2,1.541,Best
+openfaas-ocr,image-3,1.1448,Single model-based
+openfaas-ocr,image-3,0.9197500000000001,Specific model-based
+openfaas-ocr,image-3,0.9197500000000001,Best
+openfaas-ocr,image-4,1.5099,Single model-based
+openfaas-ocr,image-4,1.3745,Specific model-based
+openfaas-ocr,image-4,1.3745,Best
+openfaas-ocr,image-5,1.2286,Single model-based
+openfaas-ocr,image-5,0.9142,Specific model-based
+openfaas-ocr,image-5,0.9142,Best
+openfaas-ocr,image-1,1.0034,Single model-based
+openfaas-ocr,image-1,0.99905,Specific model-based
+openfaas-ocr,image-1,0.99905,Best
+openfaas-ocr,image-2,1.57015,Single model-based
+openfaas-ocr,image-2,1.69335,Specific model-based
+openfaas-ocr,image-2,1.541,Best
+openfaas-ocr,image-3,1.04715,Single model-based
+openfaas-ocr,image-3,0.9197500000000001,Specific model-based
+openfaas-ocr,image-3,0.9197500000000001,Best
+openfaas-ocr,image-4,1.51545,Single model-based
+openfaas-ocr,image-4,1.4407999999999999,Specific model-based
+openfaas-ocr,image-4,1.3745,Best
+openfaas-ocr,image-5,1.1033,Single model-based
+openfaas-ocr,image-5,0.9142,Specific model-based
+openfaas-ocr,image-5,0.9142,Best
+openfaas-ocr,image-1,1.0034,Single model-based
+openfaas-ocr,image-1,1.0034,Specific model-based
+openfaas-ocr,image-1,0.99905,Best
+openfaas-ocr,image-2,1.57015,Single model-based
+openfaas-ocr,image-2,1.54365,Specific model-based
+openfaas-ocr,image-2,1.541,Best
+openfaas-ocr,image-3,1.04715,Single model-based
+openfaas-ocr,image-3,0.9215,Specific model-based
+openfaas-ocr,image-3,0.9197500000000001,Best
+openfaas-ocr,image-4,1.51545,Single model-based
+openfaas-ocr,image-4,1.4407999999999999,Specific model-based
+openfaas-ocr,image-4,1.3745,Best
+openfaas-ocr,image-5,1.1033,Single model-based
+openfaas-ocr,image-5,0.9323,Specific model-based
+openfaas-ocr,image-5,0.9142,Best

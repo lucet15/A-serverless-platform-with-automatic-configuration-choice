@@ -1,0 +1,151 @@
+benchmark,data name,performance,config
+transcode,video-1,64.3489,Single model-based
+transcode,video-1,64.3489,Specific model-based
+transcode,video-1,64.3489,Best
+transcode,video-2,16.1672,Single model-based
+transcode,video-2,16.1672,Specific model-based
+transcode,video-2,16.1127,Best
+transcode,video-3,62.3013,Single model-based
+transcode,video-3,62.3013,Specific model-based
+transcode,video-3,62.3013,Best
+transcode,video-4,87.8068,Single model-based
+transcode,video-4,87.8068,Specific model-based
+transcode,video-4,87.8068,Best
+transcode,video-5,14.1905,Single model-based
+transcode,video-5,14.1905,Specific model-based
+transcode,video-5,14.1661,Best
+transcode,video-1,64.3489,Single model-based
+transcode,video-1,64.3489,Specific model-based
+transcode,video-1,64.3489,Best
+transcode,video-2,16.1672,Single model-based
+transcode,video-2,16.1672,Specific model-based
+transcode,video-2,16.1127,Best
+transcode,video-3,62.3013,Single model-based
+transcode,video-3,62.3013,Specific model-based
+transcode,video-3,62.3013,Best
+transcode,video-4,87.8068,Single model-based
+transcode,video-4,87.8068,Specific model-based
+transcode,video-4,87.8068,Best
+transcode,video-5,14.1905,Single model-based
+transcode,video-5,14.1661,Specific model-based
+transcode,video-5,14.1661,Best
+transcode,video-1,64.3489,Single model-based
+transcode,video-1,64.3489,Specific model-based
+transcode,video-1,64.3489,Best
+transcode,video-2,16.1672,Single model-based
+transcode,video-2,16.1672,Specific model-based
+transcode,video-2,16.1127,Best
+transcode,video-3,62.3013,Single model-based
+transcode,video-3,62.3013,Specific model-based
+transcode,video-3,62.3013,Best
+transcode,video-4,87.8068,Single model-based
+transcode,video-4,87.8068,Specific model-based
+transcode,video-4,87.8068,Best
+transcode,video-5,14.1905,Single model-based
+transcode,video-5,14.1905,Specific model-based
+transcode,video-5,14.1661,Best
+transcode,video-1,64.3489,Single model-based
+transcode,video-1,64.3489,Specific model-based
+transcode,video-1,64.3489,Best
+transcode,video-2,16.1672,Single model-based
+transcode,video-2,16.1127,Specific model-based
+transcode,video-2,16.1127,Best
+transcode,video-3,62.3013,Single model-based
+transcode,video-3,62.3013,Specific model-based
+transcode,video-3,62.3013,Best
+transcode,video-4,87.8068,Single model-based
+transcode,video-4,87.8068,Specific model-based
+transcode,video-4,87.8068,Best
+transcode,video-5,14.1905,Single model-based
+transcode,video-5,14.1661,Specific model-based
+transcode,video-5,14.1661,Best
+transcode,video-1,64.3489,Single model-based
+transcode,video-1,64.3489,Specific model-based
+transcode,video-1,64.3489,Best
+transcode,video-2,16.1672,Single model-based
+transcode,video-2,16.1672,Specific model-based
+transcode,video-2,16.1127,Best
+transcode,video-3,62.3013,Single model-based
+transcode,video-3,62.3013,Specific model-based
+transcode,video-3,62.3013,Best
+transcode,video-4,87.8068,Single model-based
+transcode,video-4,87.8068,Specific model-based
+transcode,video-4,87.8068,Best
+transcode,video-5,14.1905,Single model-based
+transcode,video-5,14.1661,Specific model-based
+transcode,video-5,14.1661,Best
+transcode,video-1,64.3489,Single model-based
+transcode,video-1,64.3489,Specific model-based
+transcode,video-1,64.3489,Best
+transcode,video-2,16.1127,Single model-based
+transcode,video-2,16.1127,Specific model-based
+transcode,video-2,16.1127,Best
+transcode,video-3,62.3013,Single model-based
+transcode,video-3,62.3013,Specific model-based
+transcode,video-3,62.3013,Best
+transcode,video-4,87.8068,Single model-based
+transcode,video-4,87.8068,Specific model-based
+transcode,video-4,87.8068,Best
+transcode,video-5,14.1661,Single model-based
+transcode,video-5,14.1661,Specific model-based
+transcode,video-5,14.1661,Best
+transcode,video-1,64.3489,Single model-based
+transcode,video-1,64.3489,Specific model-based
+transcode,video-1,64.3489,Best
+transcode,video-2,16.1672,Single model-based
+transcode,video-2,16.1127,Specific model-based
+transcode,video-2,16.1127,Best
+transcode,video-3,62.3013,Single model-based
+transcode,video-3,62.3013,Specific model-based
+transcode,video-3,62.3013,Best
+transcode,video-4,87.8068,Single model-based
+transcode,video-4,87.8068,Specific model-based
+transcode,video-4,87.8068,Best
+transcode,video-5,14.1905,Single model-based
+transcode,video-5,14.1661,Specific model-based
+transcode,video-5,14.1661,Best
+transcode,video-1,64.3489,Single model-based
+transcode,video-1,64.3489,Specific model-based
+transcode,video-1,64.3489,Best
+transcode,video-2,16.1672,Single model-based
+transcode,video-2,16.1127,Specific model-based
+transcode,video-2,16.1127,Best
+transcode,video-3,62.3013,Single model-based
+transcode,video-3,62.3013,Specific model-based
+transcode,video-3,62.3013,Best
+transcode,video-4,87.8068,Single model-based
+transcode,video-4,87.8068,Specific model-based
+transcode,video-4,87.8068,Best
+transcode,video-5,14.1905,Single model-based
+transcode,video-5,14.1661,Specific model-based
+transcode,video-5,14.1661,Best
+transcode,video-1,64.3489,Single model-based
+transcode,video-1,74.554,Specific model-based
+transcode,video-1,64.3489,Best
+transcode,video-2,16.1672,Single model-based
+transcode,video-2,16.1127,Specific model-based
+transcode,video-2,16.1127,Best
+transcode,video-3,62.3013,Single model-based
+transcode,video-3,62.3013,Specific model-based
+transcode,video-3,62.3013,Best
+transcode,video-4,87.8068,Single model-based
+transcode,video-4,87.8068,Specific model-based
+transcode,video-4,87.8068,Best
+transcode,video-5,14.1905,Single model-based
+transcode,video-5,14.1905,Specific model-based
+transcode,video-5,14.1661,Best
+transcode,video-1,64.3489,Single model-based
+transcode,video-1,64.3489,Specific model-based
+transcode,video-1,64.3489,Best
+transcode,video-2,16.1672,Single model-based
+transcode,video-2,16.1672,Specific model-based
+transcode,video-2,16.1127,Best
+transcode,video-3,62.3013,Single model-based
+transcode,video-3,62.3013,Specific model-based
+transcode,video-3,62.3013,Best
+transcode,video-4,87.8068,Single model-based
+transcode,video-4,87.8068,Specific model-based
+transcode,video-4,87.8068,Best
+transcode,video-5,14.1905,Single model-based
+transcode,video-5,14.1905,Specific model-based
+transcode,video-5,14.1661,Best

@@ -1,0 +1,151 @@
+benchmark,data name,performance,config
+pigo-face-detector,image-1,1.26565,Single model-based
+pigo-face-detector,image-1,0.98525,Specific model-based
+pigo-face-detector,image-1,0.98525,Best
+pigo-face-detector,image-2,0.8082,Single model-based
+pigo-face-detector,image-2,0.7622500000000001,Specific model-based
+pigo-face-detector,image-2,0.7107,Best
+pigo-face-detector,image-3,1.0293,Single model-based
+pigo-face-detector,image-3,0.78845,Specific model-based
+pigo-face-detector,image-3,0.78845,Best
+pigo-face-detector,image-4,0.9857,Single model-based
+pigo-face-detector,image-4,0.78545,Specific model-based
+pigo-face-detector,image-4,0.7352000000000001,Best
+pigo-face-detector,image-5,0.88735,Single model-based
+pigo-face-detector,image-5,0.8136,Specific model-based
+pigo-face-detector,image-5,0.7237,Best
+pigo-face-detector,image-1,0.98525,Single model-based
+pigo-face-detector,image-1,1.05255,Specific model-based
+pigo-face-detector,image-1,0.98525,Best
+pigo-face-detector,image-2,0.7107,Single model-based
+pigo-face-detector,image-2,0.7107,Specific model-based
+pigo-face-detector,image-2,0.7107,Best
+pigo-face-detector,image-3,0.7893,Single model-based
+pigo-face-detector,image-3,0.7893,Specific model-based
+pigo-face-detector,image-3,0.78845,Best
+pigo-face-detector,image-4,0.736,Single model-based
+pigo-face-detector,image-4,0.7782,Specific model-based
+pigo-face-detector,image-4,0.7352000000000001,Best
+pigo-face-detector,image-5,0.7237,Single model-based
+pigo-face-detector,image-5,0.7793,Specific model-based
+pigo-face-detector,image-5,0.7237,Best
+pigo-face-detector,image-1,1.2219000000000002,Single model-based
+pigo-face-detector,image-1,0.98525,Specific model-based
+pigo-face-detector,image-1,0.98525,Best
+pigo-face-detector,image-2,0.7734000000000001,Single model-based
+pigo-face-detector,image-2,0.7107,Specific model-based
+pigo-face-detector,image-2,0.7107,Best
+pigo-face-detector,image-3,0.8120499999999999,Single model-based
+pigo-face-detector,image-3,0.7893,Specific model-based
+pigo-face-detector,image-3,0.78845,Best
+pigo-face-detector,image-4,0.8307,Single model-based
+pigo-face-detector,image-4,0.77955,Specific model-based
+pigo-face-detector,image-4,0.7352000000000001,Best
+pigo-face-detector,image-5,0.74575,Single model-based
+pigo-face-detector,image-5,0.7237,Specific model-based
+pigo-face-detector,image-5,0.7237,Best
+pigo-face-detector,image-1,0.98705,Single model-based
+pigo-face-detector,image-1,1.03865,Specific model-based
+pigo-face-detector,image-1,0.98525,Best
+pigo-face-detector,image-2,0.7122999999999999,Single model-based
+pigo-face-detector,image-2,0.75405,Specific model-based
+pigo-face-detector,image-2,0.7107,Best
+pigo-face-detector,image-3,0.78845,Single model-based
+pigo-face-detector,image-3,0.8471,Specific model-based
+pigo-face-detector,image-3,0.78845,Best
+pigo-face-detector,image-4,0.7352000000000001,Single model-based
+pigo-face-detector,image-4,0.7352000000000001,Specific model-based
+pigo-face-detector,image-4,0.7352000000000001,Best
+pigo-face-detector,image-5,0.72405,Single model-based
+pigo-face-detector,image-5,0.7237,Specific model-based
+pigo-face-detector,image-5,0.7237,Best
+pigo-face-detector,image-1,0.98705,Single model-based
+pigo-face-detector,image-1,0.98525,Specific model-based
+pigo-face-detector,image-1,0.98525,Best
+pigo-face-detector,image-2,0.7122999999999999,Single model-based
+pigo-face-detector,image-2,0.7107,Specific model-based
+pigo-face-detector,image-2,0.7107,Best
+pigo-face-detector,image-3,0.78845,Single model-based
+pigo-face-detector,image-3,0.7893,Specific model-based
+pigo-face-detector,image-3,0.78845,Best
+pigo-face-detector,image-4,0.7352000000000001,Single model-based
+pigo-face-detector,image-4,0.736,Specific model-based
+pigo-face-detector,image-4,0.7352000000000001,Best
+pigo-face-detector,image-5,0.72405,Single model-based
+pigo-face-detector,image-5,0.7237,Specific model-based
+pigo-face-detector,image-5,0.7237,Best
+pigo-face-detector,image-1,0.98705,Single model-based
+pigo-face-detector,image-1,0.98705,Specific model-based
+pigo-face-detector,image-1,0.98525,Best
+pigo-face-detector,image-2,0.7122999999999999,Single model-based
+pigo-face-detector,image-2,0.7122999999999999,Specific model-based
+pigo-face-detector,image-2,0.7107,Best
+pigo-face-detector,image-3,0.78845,Single model-based
+pigo-face-detector,image-3,0.78845,Specific model-based
+pigo-face-detector,image-3,0.78845,Best
+pigo-face-detector,image-4,0.7352000000000001,Single model-based
+pigo-face-detector,image-4,0.7352000000000001,Specific model-based
+pigo-face-detector,image-4,0.7352000000000001,Best
+pigo-face-detector,image-5,0.72405,Single model-based
+pigo-face-detector,image-5,0.72405,Specific model-based
+pigo-face-detector,image-5,0.7237,Best
+pigo-face-detector,image-1,0.98705,Single model-based
+pigo-face-detector,image-1,0.98525,Specific model-based
+pigo-face-detector,image-1,0.98525,Best
+pigo-face-detector,image-2,0.7122999999999999,Single model-based
+pigo-face-detector,image-2,0.7107,Specific model-based
+pigo-face-detector,image-2,0.7107,Best
+pigo-face-detector,image-3,0.78845,Single model-based
+pigo-face-detector,image-3,0.7893,Specific model-based
+pigo-face-detector,image-3,0.78845,Best
+pigo-face-detector,image-4,0.7352000000000001,Single model-based
+pigo-face-detector,image-4,0.736,Specific model-based
+pigo-face-detector,image-4,0.7352000000000001,Best
+pigo-face-detector,image-5,0.72405,Single model-based
+pigo-face-detector,image-5,0.7237,Specific model-based
+pigo-face-detector,image-5,0.7237,Best
+pigo-face-detector,image-1,0.98705,Single model-based
+pigo-face-detector,image-1,1.05255,Specific model-based
+pigo-face-detector,image-1,0.98525,Best
+pigo-face-detector,image-2,0.7122999999999999,Single model-based
+pigo-face-detector,image-2,0.7122999999999999,Specific model-based
+pigo-face-detector,image-2,0.7107,Best
+pigo-face-detector,image-3,0.78845,Single model-based
+pigo-face-detector,image-3,0.78845,Specific model-based
+pigo-face-detector,image-3,0.78845,Best
+pigo-face-detector,image-4,0.7352000000000001,Single model-based
+pigo-face-detector,image-4,0.78545,Specific model-based
+pigo-face-detector,image-4,0.7352000000000001,Best
+pigo-face-detector,image-5,0.72405,Single model-based
+pigo-face-detector,image-5,0.72405,Specific model-based
+pigo-face-detector,image-5,0.7237,Best
+pigo-face-detector,image-1,1.2219000000000002,Single model-based
+pigo-face-detector,image-1,0.98705,Specific model-based
+pigo-face-detector,image-1,0.98525,Best
+pigo-face-detector,image-2,0.7734000000000001,Single model-based
+pigo-face-detector,image-2,0.7122999999999999,Specific model-based
+pigo-face-detector,image-2,0.7107,Best
+pigo-face-detector,image-3,0.8120499999999999,Single model-based
+pigo-face-detector,image-3,0.78845,Specific model-based
+pigo-face-detector,image-3,0.78845,Best
+pigo-face-detector,image-4,0.8307,Single model-based
+pigo-face-detector,image-4,0.7352000000000001,Specific model-based
+pigo-face-detector,image-4,0.7352000000000001,Best
+pigo-face-detector,image-5,0.74575,Single model-based
+pigo-face-detector,image-5,0.7237,Specific model-based
+pigo-face-detector,image-5,0.7237,Best
+pigo-face-detector,image-1,1.2219000000000002,Single model-based
+pigo-face-detector,image-1,0.98525,Specific model-based
+pigo-face-detector,image-1,0.98525,Best
+pigo-face-detector,image-2,0.7734000000000001,Single model-based
+pigo-face-detector,image-2,0.7107,Specific model-based
+pigo-face-detector,image-2,0.7107,Best
+pigo-face-detector,image-3,0.8120499999999999,Single model-based
+pigo-face-detector,image-3,0.78845,Specific model-based
+pigo-face-detector,image-3,0.78845,Best
+pigo-face-detector,image-4,0.8307,Single model-based
+pigo-face-detector,image-4,0.7352000000000001,Specific model-based
+pigo-face-detector,image-4,0.7352000000000001,Best
+pigo-face-detector,image-5,0.74575,Single model-based
+pigo-face-detector,image-5,0.7237,Specific model-based
+pigo-face-detector,image-5,0.7237,Best

@@ -1,0 +1,16 @@
+benchmark,data name,performance,config
+pigo-faceblur,image-1,9.635130208333334e-06,Single model-based
+pigo-faceblur,image-1,8.449586588541666e-06,Specific model-based
+pigo-faceblur,image-1,8.449586588541666e-06,Best
+pigo-faceblur,image-2,6.161966145833334e-06,Single model-based
+pigo-faceblur,image-2,5.983803168402778e-06,Specific model-based
+pigo-faceblur,image-2,5.557687065972222e-06,Best
+pigo-faceblur,image-3,6.902795138888888e-06,Single model-based
+pigo-faceblur,image-3,6.727300347222221e-06,Specific model-based
+pigo-faceblur,image-3,6.443917100694444e-06,Best
+pigo-faceblur,image-4,6.0572309027777786e-06,Single model-based
+pigo-faceblur,image-4,5.903233506944445e-06,Specific model-based
+pigo-faceblur,image-4,5.903233506944445e-06,Best
+pigo-faceblur,image-5,6.176818576388889e-06,Single model-based
+pigo-faceblur,image-5,6.019780815972223e-06,Specific model-based
+pigo-faceblur,image-5,6.019780815972223e-06,Best

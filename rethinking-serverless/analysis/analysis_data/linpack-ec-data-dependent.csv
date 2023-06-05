@@ -1,0 +1,10 @@
+benchmark,data name,performance,config
+linpack,1000,7.828837186098099e-06,Single model-based
+linpack,1000,5.208176045368114e-06,Specific model-based
+linpack,1000,5.116943109573588e-06,Best
+linpack,5000,0.0002379817148546378,Single model-based
+linpack,5000,0.000226152177999417,Specific model-based
+linpack,5000,0.00019831197671592234,Best
+linpack,7500,10000.0,Single model-based
+linpack,7500,0.0008157580331712962,Specific model-based
+linpack,7500,0.0006653847168965472,Best

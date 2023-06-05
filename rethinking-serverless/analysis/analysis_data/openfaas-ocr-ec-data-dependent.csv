@@ -1,0 +1,16 @@
+benchmark,data name,performance,config
+openfaas-ocr,image-1,1.0426638541666667e-05,Single model-based
+openfaas-ocr,image-1,8.295598090277778e-06,Specific model-based
+openfaas-ocr,image-1,7.3690677083333325e-06,Best
+openfaas-ocr,image-2,1.77928953125e-05,Single model-based
+openfaas-ocr,image-2,1.6590229166666667e-05,Specific model-based
+openfaas-ocr,image-2,1.525287786458333e-05,Best
+openfaas-ocr,image-3,9.903040364583334e-06,Single model-based
+openfaas-ocr,image-3,7.4956506076388875e-06,Specific model-based
+openfaas-ocr,image-3,6.670196093749999e-06,Best
+openfaas-ocr,image-4,1.4072468229166665e-05,Single model-based
+openfaas-ocr,image-4,1.3256322569444445e-05,Specific model-based
+openfaas-ocr,image-4,1.1569709374999998e-05,Best
+openfaas-ocr,image-5,1.1260429687499998e-05,Single model-based
+openfaas-ocr,image-5,7.492967447916666e-06,Specific model-based
+openfaas-ocr,image-5,6.619768142361111e-06,Best

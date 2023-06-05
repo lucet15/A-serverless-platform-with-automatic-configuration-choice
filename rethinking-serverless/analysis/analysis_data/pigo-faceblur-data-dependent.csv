@@ -1,0 +1,151 @@
+benchmark,data name,performance,config
+pigo-faceblur,image-1,1.02405,Single model-based
+pigo-faceblur,image-1,0.98865,Specific model-based
+pigo-faceblur,image-1,0.9831,Best
+pigo-faceblur,image-2,0.9406,Single model-based
+pigo-faceblur,image-2,0.7505999999999999,Specific model-based
+pigo-faceblur,image-2,0.71645,Best
+pigo-faceblur,image-3,1.2123,Single model-based
+pigo-faceblur,image-3,0.8633500000000001,Specific model-based
+pigo-faceblur,image-3,0.80625,Best
+pigo-faceblur,image-4,0.9564,Single model-based
+pigo-faceblur,image-4,0.78905,Specific model-based
+pigo-faceblur,image-4,0.73845,Best
+pigo-faceblur,image-5,0.96665,Single model-based
+pigo-faceblur,image-5,0.78775,Specific model-based
+pigo-faceblur,image-5,0.73575,Best
+pigo-faceblur,image-1,0.98865,Single model-based
+pigo-faceblur,image-1,1.02405,Specific model-based
+pigo-faceblur,image-1,0.9831,Best
+pigo-faceblur,image-2,0.7207,Single model-based
+pigo-faceblur,image-2,0.7207,Specific model-based
+pigo-faceblur,image-2,0.71645,Best
+pigo-faceblur,image-3,0.80625,Single model-based
+pigo-faceblur,image-3,0.80625,Specific model-based
+pigo-faceblur,image-3,0.80625,Best
+pigo-faceblur,image-4,0.7395,Single model-based
+pigo-faceblur,image-4,0.8036,Specific model-based
+pigo-faceblur,image-4,0.73845,Best
+pigo-faceblur,image-5,0.73575,Single model-based
+pigo-faceblur,image-5,0.78775,Specific model-based
+pigo-faceblur,image-5,0.73575,Best
+pigo-faceblur,image-1,1.0877,Single model-based
+pigo-faceblur,image-1,0.98865,Specific model-based
+pigo-faceblur,image-1,0.9831,Best
+pigo-faceblur,image-2,0.9231,Single model-based
+pigo-faceblur,image-2,0.7207,Specific model-based
+pigo-faceblur,image-2,0.71645,Best
+pigo-faceblur,image-3,0.8349500000000001,Single model-based
+pigo-faceblur,image-3,0.80625,Specific model-based
+pigo-faceblur,image-3,0.80625,Best
+pigo-faceblur,image-4,0.74895,Single model-based
+pigo-faceblur,image-4,0.7395,Specific model-based
+pigo-faceblur,image-4,0.73845,Best
+pigo-faceblur,image-5,0.73975,Single model-based
+pigo-faceblur,image-5,0.73975,Specific model-based
+pigo-faceblur,image-5,0.73575,Best
+pigo-faceblur,image-1,1.2641,Single model-based
+pigo-faceblur,image-1,0.9831,Specific model-based
+pigo-faceblur,image-1,0.9831,Best
+pigo-faceblur,image-2,0.8163,Single model-based
+pigo-faceblur,image-2,0.7643,Specific model-based
+pigo-faceblur,image-2,0.71645,Best
+pigo-faceblur,image-3,1.073,Single model-based
+pigo-faceblur,image-3,0.8631,Specific model-based
+pigo-faceblur,image-3,0.80625,Best
+pigo-faceblur,image-4,0.8347,Single model-based
+pigo-faceblur,image-4,0.7885,Specific model-based
+pigo-faceblur,image-4,0.73845,Best
+pigo-faceblur,image-5,0.8267500000000001,Single model-based
+pigo-faceblur,image-5,0.73975,Specific model-based
+pigo-faceblur,image-5,0.73575,Best
+pigo-faceblur,image-1,1.2347000000000001,Single model-based
+pigo-faceblur,image-1,1.0624,Specific model-based
+pigo-faceblur,image-1,0.9831,Best
+pigo-faceblur,image-2,0.80035,Single model-based
+pigo-faceblur,image-2,0.7207,Specific model-based
+pigo-faceblur,image-2,0.71645,Best
+pigo-faceblur,image-3,0.9188000000000001,Single model-based
+pigo-faceblur,image-3,0.80625,Specific model-based
+pigo-faceblur,image-3,0.80625,Best
+pigo-faceblur,image-4,0.8162499999999999,Single model-based
+pigo-faceblur,image-4,0.74895,Specific model-based
+pigo-faceblur,image-4,0.73845,Best
+pigo-faceblur,image-5,0.8182,Single model-based
+pigo-faceblur,image-5,0.78775,Specific model-based
+pigo-faceblur,image-5,0.73575,Best
+pigo-faceblur,image-1,1.0877,Single model-based
+pigo-faceblur,image-1,0.9831,Specific model-based
+pigo-faceblur,image-1,0.9831,Best
+pigo-faceblur,image-2,0.9231,Single model-based
+pigo-faceblur,image-2,0.71645,Specific model-based
+pigo-faceblur,image-2,0.71645,Best
+pigo-faceblur,image-3,0.8349500000000001,Single model-based
+pigo-faceblur,image-3,0.8075,Specific model-based
+pigo-faceblur,image-3,0.80625,Best
+pigo-faceblur,image-4,0.74895,Single model-based
+pigo-faceblur,image-4,0.73845,Specific model-based
+pigo-faceblur,image-4,0.73845,Best
+pigo-faceblur,image-5,0.73975,Single model-based
+pigo-faceblur,image-5,0.73675,Specific model-based
+pigo-faceblur,image-5,0.73575,Best
+pigo-faceblur,image-1,1.0877,Single model-based
+pigo-faceblur,image-1,0.98865,Specific model-based
+pigo-faceblur,image-1,0.9831,Best
+pigo-faceblur,image-2,0.9231,Single model-based
+pigo-faceblur,image-2,0.7207,Specific model-based
+pigo-faceblur,image-2,0.71645,Best
+pigo-faceblur,image-3,0.8349500000000001,Single model-based
+pigo-faceblur,image-3,0.8349500000000001,Specific model-based
+pigo-faceblur,image-3,0.80625,Best
+pigo-faceblur,image-4,0.74895,Single model-based
+pigo-faceblur,image-4,0.73845,Specific model-based
+pigo-faceblur,image-4,0.73845,Best
+pigo-faceblur,image-5,0.73975,Single model-based
+pigo-faceblur,image-5,0.73975,Specific model-based
+pigo-faceblur,image-5,0.73575,Best
+pigo-faceblur,image-1,1.2347000000000001,Single model-based
+pigo-faceblur,image-1,1.06965,Specific model-based
+pigo-faceblur,image-1,0.9831,Best
+pigo-faceblur,image-2,0.80035,Single model-based
+pigo-faceblur,image-2,0.71645,Specific model-based
+pigo-faceblur,image-2,0.71645,Best
+pigo-faceblur,image-3,0.9188000000000001,Single model-based
+pigo-faceblur,image-3,0.8075,Specific model-based
+pigo-faceblur,image-3,0.80625,Best
+pigo-faceblur,image-4,0.8162499999999999,Single model-based
+pigo-faceblur,image-4,0.8001,Specific model-based
+pigo-faceblur,image-4,0.73845,Best
+pigo-faceblur,image-5,0.8182,Single model-based
+pigo-faceblur,image-5,0.73575,Specific model-based
+pigo-faceblur,image-5,0.73575,Best
+pigo-faceblur,image-1,0.98865,Single model-based
+pigo-faceblur,image-1,0.9831,Specific model-based
+pigo-faceblur,image-1,0.9831,Best
+pigo-faceblur,image-2,0.7207,Single model-based
+pigo-faceblur,image-2,0.71645,Specific model-based
+pigo-faceblur,image-2,0.71645,Best
+pigo-faceblur,image-3,0.80625,Single model-based
+pigo-faceblur,image-3,0.80625,Specific model-based
+pigo-faceblur,image-3,0.80625,Best
+pigo-faceblur,image-4,0.7395,Single model-based
+pigo-faceblur,image-4,0.73845,Specific model-based
+pigo-faceblur,image-4,0.73845,Best
+pigo-faceblur,image-5,0.73575,Single model-based
+pigo-faceblur,image-5,0.73575,Specific model-based
+pigo-faceblur,image-5,0.73575,Best
+pigo-faceblur,image-1,0.98865,Single model-based
+pigo-faceblur,image-1,0.9831,Specific model-based
+pigo-faceblur,image-1,0.9831,Best
+pigo-faceblur,image-2,0.7207,Single model-based
+pigo-faceblur,image-2,0.71645,Specific model-based
+pigo-faceblur,image-2,0.71645,Best
+pigo-faceblur,image-3,0.80625,Single model-based
+pigo-faceblur,image-3,0.80625,Specific model-based
+pigo-faceblur,image-3,0.80625,Best
+pigo-faceblur,image-4,0.7395,Single model-based
+pigo-faceblur,image-4,0.73845,Specific model-based
+pigo-faceblur,image-4,0.73845,Best
+pigo-faceblur,image-5,0.73575,Single model-based
+pigo-faceblur,image-5,0.73575,Specific model-based
+pigo-faceblur,image-5,0.73575,Best

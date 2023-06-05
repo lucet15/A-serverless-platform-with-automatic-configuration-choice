@@ -1,0 +1,16 @@
+benchmark,data name,performance,config
+pigo-face-detector,image-1,9.091992187500001e-06,Single model-based
+pigo-face-detector,image-1,9.201649175347222e-06,Specific model-based
+pigo-face-detector,image-1,8.22658203125e-06,Best
+pigo-face-detector,image-2,5.9e-06,Single model-based
+pigo-face-detector,image-2,5.750000000000001e-06,Specific model-based
+pigo-face-detector,image-2,5.695753038194444e-06,Best
+pigo-face-detector,image-3,6.6651562500000005e-06,Single model-based
+pigo-face-detector,image-3,6.4957031250000006e-06,Specific model-based
+pigo-face-detector,image-3,6.428475477430555e-06,Best
+pigo-face-detector,image-4,6.106141493055556e-06,Single model-based
+pigo-face-detector,image-4,5.950900607638889e-06,Specific model-based
+pigo-face-detector,image-4,5.853520616319444e-06,Best
+pigo-face-detector,image-5,6.127139756944444e-06,Single model-based
+pigo-face-detector,image-5,5.971365017361111e-06,Specific model-based
+pigo-face-detector,image-5,5.971365017361111e-06,Best

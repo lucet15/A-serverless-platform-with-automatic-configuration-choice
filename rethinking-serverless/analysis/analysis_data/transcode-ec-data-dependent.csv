@@ -1,0 +1,16 @@
+benchmark,data name,performance,config
+transcode,video-1,0.0011234657510416665,Single model-based
+transcode,video-1,0.0011350907118055555,Specific model-based
+transcode,video-1,0.0010878717414930553,Best
+transcode,video-2,0.00025276741874999994,Single model-based
+transcode,video-2,0.00028392756302083336,Specific model-based
+transcode,video-2,0.0002438470052083333,Best
+transcode,video-3,0.0010918845388888888,Single model-based
+transcode,video-3,0.0010561318359374999,Specific model-based
+transcode,video-3,0.0010513304484375,Best
+transcode,video-4,0.0015429191336805554,Single model-based
+transcode,video-4,0.0012322916666666665,Specific model-based
+transcode,video-4,0.0012322916666666665,Best
+transcode,video-5,0.00022174393645833332,Single model-based
+transcode,video-5,0.0002466907128472222,Specific model-based
+transcode,video-5,0.00021223567482638888,Best

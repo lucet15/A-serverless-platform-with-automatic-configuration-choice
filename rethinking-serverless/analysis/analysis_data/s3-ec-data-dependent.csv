@@ -1,0 +1,16 @@
+benchmark,data name,performance,config
+s3,video-1,1.1308144704861111e-05,Single model-based
+s3,video-1,1.0786651692708334e-05,Specific model-based
+s3,video-1,1.0062639453125e-05,Best
+s3,video-2,9.4778453125e-06,Single model-based
+s3,video-2,8.653556640625e-06,Specific model-based
+s3,video-2,8.202525260416666e-06,Best
+s3,video-3,1.1269171614583335e-05,Single model-based
+s3,video-3,1.039301779513889e-05,Specific model-based
+s3,video-3,9.869440364583333e-06,Best
+s3,video-4,1.2604307638888888e-05,Single model-based
+s3,video-4,1.2398439019097223e-05,Specific model-based
+s3,video-4,1.1102267057291665e-05,Best
+s3,video-5,9.803065494791666e-06,Single model-based
+s3,video-5,8.864288845486112e-06,Specific model-based
+s3,video-5,8.282301562499999e-06,Best

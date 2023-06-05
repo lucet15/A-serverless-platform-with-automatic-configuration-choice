@@ -1,0 +1,151 @@
+benchmark,data name,performance,config
+s3,video-1,2.51265,Single model-based
+s3,video-1,2.46055,Specific model-based
+s3,video-1,2.4573,Best
+s3,video-2,2.16695,Single model-based
+s3,video-2,2.125,Specific model-based
+s3,video-2,2.1010999999999997,Best
+s3,video-3,2.61305,Single model-based
+s3,video-3,2.4569,Specific model-based
+s3,video-3,2.4569,Best
+s3,video-4,3.02785,Single model-based
+s3,video-4,2.52345,Specific model-based
+s3,video-4,2.5126999999999997,Best
+s3,video-5,2.2121500000000003,Single model-based
+s3,video-5,2.1310000000000002,Specific model-based
+s3,video-5,2.1310000000000002,Best
+s3,video-1,2.5279499999999997,Single model-based
+s3,video-1,2.4573,Specific model-based
+s3,video-1,2.4573,Best
+s3,video-2,2.15085,Single model-based
+s3,video-2,2.1364,Specific model-based
+s3,video-2,2.1010999999999997,Best
+s3,video-3,2.5157,Single model-based
+s3,video-3,2.4569,Specific model-based
+s3,video-3,2.4569,Best
+s3,video-4,2.5126999999999997,Single model-based
+s3,video-4,2.52345,Specific model-based
+s3,video-4,2.5126999999999997,Best
+s3,video-5,2.15685,Single model-based
+s3,video-5,2.1310000000000002,Specific model-based
+s3,video-5,2.1310000000000002,Best
+s3,video-1,2.5525,Single model-based
+s3,video-1,2.4573,Specific model-based
+s3,video-1,2.4573,Best
+s3,video-2,2.16835,Single model-based
+s3,video-2,2.13065,Specific model-based
+s3,video-2,2.1010999999999997,Best
+s3,video-3,2.68225,Single model-based
+s3,video-3,2.4581999999999997,Specific model-based
+s3,video-3,2.4569,Best
+s3,video-4,2.58975,Single model-based
+s3,video-4,2.58975,Specific model-based
+s3,video-4,2.5126999999999997,Best
+s3,video-5,2.2268499999999998,Single model-based
+s3,video-5,2.1310000000000002,Specific model-based
+s3,video-5,2.1310000000000002,Best
+s3,video-1,2.51265,Single model-based
+s3,video-1,2.4627,Specific model-based
+s3,video-1,2.4573,Best
+s3,video-2,2.16695,Single model-based
+s3,video-2,2.1263,Specific model-based
+s3,video-2,2.1010999999999997,Best
+s3,video-3,2.61305,Single model-based
+s3,video-3,2.4571,Specific model-based
+s3,video-3,2.4569,Best
+s3,video-4,3.02785,Single model-based
+s3,video-4,2.52345,Specific model-based
+s3,video-4,2.5126999999999997,Best
+s3,video-5,2.2121500000000003,Single model-based
+s3,video-5,2.1337,Specific model-based
+s3,video-5,2.1310000000000002,Best
+s3,video-1,2.4962999999999997,Single model-based
+s3,video-1,2.4573,Specific model-based
+s3,video-1,2.4573,Best
+s3,video-2,2.16865,Single model-based
+s3,video-2,2.125,Specific model-based
+s3,video-2,2.1010999999999997,Best
+s3,video-3,2.70255,Single model-based
+s3,video-3,2.4569,Specific model-based
+s3,video-3,2.4569,Best
+s3,video-4,2.5572,Single model-based
+s3,video-4,2.52345,Specific model-based
+s3,video-4,2.5126999999999997,Best
+s3,video-5,2.2104999999999997,Single model-based
+s3,video-5,2.1310000000000002,Specific model-based
+s3,video-5,2.1310000000000002,Best
+s3,video-1,2.4962999999999997,Single model-based
+s3,video-1,2.4573,Specific model-based
+s3,video-1,2.4573,Best
+s3,video-2,2.16865,Single model-based
+s3,video-2,2.1010999999999997,Specific model-based
+s3,video-2,2.1010999999999997,Best
+s3,video-3,2.70255,Single model-based
+s3,video-3,2.4569,Specific model-based
+s3,video-3,2.4569,Best
+s3,video-4,2.5572,Single model-based
+s3,video-4,2.52345,Specific model-based
+s3,video-4,2.5126999999999997,Best
+s3,video-5,2.2104999999999997,Single model-based
+s3,video-5,2.1310000000000002,Specific model-based
+s3,video-5,2.1310000000000002,Best
+s3,video-1,2.51265,Single model-based
+s3,video-1,2.4573,Specific model-based
+s3,video-1,2.4573,Best
+s3,video-2,2.16695,Single model-based
+s3,video-2,2.1010999999999997,Specific model-based
+s3,video-2,2.1010999999999997,Best
+s3,video-3,2.61305,Single model-based
+s3,video-3,2.4571,Specific model-based
+s3,video-3,2.4569,Best
+s3,video-4,3.02785,Single model-based
+s3,video-4,2.5126999999999997,Specific model-based
+s3,video-4,2.5126999999999997,Best
+s3,video-5,2.2121500000000003,Single model-based
+s3,video-5,2.1310000000000002,Specific model-based
+s3,video-5,2.1310000000000002,Best
+s3,video-1,2.5279499999999997,Single model-based
+s3,video-1,2.4573,Specific model-based
+s3,video-1,2.4573,Best
+s3,video-2,2.15085,Single model-based
+s3,video-2,2.13065,Specific model-based
+s3,video-2,2.1010999999999997,Best
+s3,video-3,2.5157,Single model-based
+s3,video-3,2.4571,Specific model-based
+s3,video-3,2.4569,Best
+s3,video-4,2.5126999999999997,Single model-based
+s3,video-4,2.5126999999999997,Specific model-based
+s3,video-4,2.5126999999999997,Best
+s3,video-5,2.15685,Single model-based
+s3,video-5,2.1310000000000002,Specific model-based
+s3,video-5,2.1310000000000002,Best
+s3,video-1,2.4962999999999997,Single model-based
+s3,video-1,2.46055,Specific model-based
+s3,video-1,2.4573,Best
+s3,video-2,2.16865,Single model-based
+s3,video-2,2.13075,Specific model-based
+s3,video-2,2.1010999999999997,Best
+s3,video-3,2.70255,Single model-based
+s3,video-3,2.4581999999999997,Specific model-based
+s3,video-3,2.4569,Best
+s3,video-4,2.5572,Single model-based
+s3,video-4,2.5126999999999997,Specific model-based
+s3,video-4,2.5126999999999997,Best
+s3,video-5,2.2104999999999997,Single model-based
+s3,video-5,2.1310000000000002,Specific model-based
+s3,video-5,2.1310000000000002,Best
+s3,video-1,2.4962999999999997,Single model-based
+s3,video-1,2.4627,Specific model-based
+s3,video-1,2.4573,Best
+s3,video-2,2.16865,Single model-based
+s3,video-2,2.1010999999999997,Specific model-based
+s3,video-2,2.1010999999999997,Best
+s3,video-3,2.70255,Single model-based
+s3,video-3,2.4569,Specific model-based
+s3,video-3,2.4569,Best
+s3,video-4,2.5572,Single model-based
+s3,video-4,2.52345,Specific model-based
+s3,video-4,2.5126999999999997,Best
+s3,video-5,2.2104999999999997,Single model-based
+s3,video-5,2.1511500000000003,Specific model-based
+s3,video-5,2.1310000000000002,Best
