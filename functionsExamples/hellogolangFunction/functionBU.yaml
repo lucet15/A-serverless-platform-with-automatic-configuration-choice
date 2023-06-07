@@ -3,8 +3,6 @@ version: 1.0
 provider:
   name: openfaas
   gateway: a87ca7c8cbd2e461294e23e6dba525c8-552981068.eu-west-2.elb.amazonaws.com:8080
-  labels:
-    - beta.kubernetes.io/instance-type=t3.small
 
 functions:
   hello-golang:
@@ -13,9 +11,3 @@ functions:
     image: lucet/hello-golang
     constraints:
       - "beta.kubernetes.io/instance-type=t3.small"
-    annotations:
-      beta.kubernetes.io/instance-type: t3.small
-    nodeSelector:
-      - beta.kubernetes.io/instance-type=t3.smal
-    labels:
-      beta.kubernetes.io/instance-type: t3.smalll
