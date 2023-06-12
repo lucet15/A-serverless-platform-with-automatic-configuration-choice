@@ -1,11 +1,11 @@
 version: 1.0
 provider:
   name: openfaas
-  gateway: a87ca7c8cbd2e461294e23e6dba525c8-552981068.eu-west-2.elb.amazonaws.com:8080
+  gateway: a86b0eaf2966b4c7a8c36edc2168b7f5-47227280.eu-west-2.elb.amazonaws.com:8080
 functions:
   hello-golang:
     lang: go
     handler: ./hello-golang
     image: lucet/hello-golang
     constraints:
-    - beta.kubernetes.io/instance-type=m5.large
+    - beta.kubernetes.io/instance-type=t3.small

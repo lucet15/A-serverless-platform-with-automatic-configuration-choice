@@ -2,9 +2,10 @@
 
 # chmod +x scriptfile.sh
 
-# Variables
-CLUSTER_NAME=openfaas
-REGION=eu-west-2
+source ../config.sh
+
+CLUSTER_NAME=$cluster_name
+CLUSTER_REGION=$cluster_region
 
 # Set AWS credentials before script execution
 
@@ -14,9 +15,9 @@ then
   echo "Credentials tested, proceeding with the cluster creation."
 
 # Creation of EKS cluster
-  eksctl create cluster \
+eksctl create cluster \
   --name $CLUSTER_NAME \
-  --region $REGION \
+  --region $CLUSTER_REGION \
   --nodes 2 \
   --node-type c6g.medium \
   --auto-kubeconfig
@@ -36,9 +37,9 @@ fi
 
 sleep 5
 
-echo export KUBECONFIG=~/.kube/eksctl/clusters/$CLUSTER_NAME
+echo export KUBECONFIG=~/.kube/eksctl/clusters/$cluster_name
 
-export KUBECONFIG=~/.kube/eksctl/clusters/$CLUSTER_NAME
+export KUBECONFIG=~/.kube/eksctl/clusters/$cluster_name
 
 # Configuring resources
 
@@ -64,6 +65,8 @@ PASSWORD=$(kubectl -n openfaas get secret basic-auth -o jsonpath="{.data.basic-a
 
 echo "Getting the gateway URL..."
 export OPENFAAS_URL=$(kubectl get svc -n openfaas gateway-external -o  jsonpath='{.status.loadBalancer.ingress[*].hostname}'):8080 && echo Your gateway URL is: $OPENFAAS_URL
+
+echo openfaas_url=$OPENFAAS_URL >> ../config.sh
 
 echo "Logging..."
 echo -n $PASSWORD | faas-cli login -g $OPENFAAS_URL -u admin --password-stdin

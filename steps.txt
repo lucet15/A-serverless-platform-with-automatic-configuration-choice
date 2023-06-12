@@ -13,12 +13,28 @@ faas-cli build -f function.yaml && faas-cli push -f function.yaml && faas-cli pu
 # ========================== get instance type  ==========================
 # ========================================================================
 
+# Constraints to the specific node in the yml file of the openfaas function
+
+constraints:
+      - "beta.kubernetes.io/instance-type=t3.small"
+
+-------
+
 kubectl get nodes -o json|jq -Cjr '.items[] | .metadata.name," ",.metadata.labels."beta.kubernetes.io/instance-type"," ",.metadata.labels."beta.kubernetes.io/arch", "\n"'|sort -k3 -r
 
 (output)
 
 	ip-192-168-65-41.eu-west-2.compute.internal m5.large amd64
 	ip-192-168-44-137.eu-west-2.compute.internal m5.large amd64
+
+
+kubectl get nodes -o json|jq -Cjr '.items[] |" ",.metadata.labels."beta.kubernetes.io/instance-type","\n"'|sort -k3 -r
+
+(output)
+
+ c6g.medium
+ c6g.medium
+
 
 # ========================================================================
 # ========================================================================
@@ -226,6 +242,5 @@ spec:
       targetPort: 80
 
 kubectl create -f example-service.yaml
-
 
 # https://www.clickittech.com/devops/kubernetes-on-aws/
