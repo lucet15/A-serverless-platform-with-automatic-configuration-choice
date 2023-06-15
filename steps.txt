@@ -1,4 +1,18 @@
- ========================================================================
+
+# ========================================================================
+# ============================== Run Grafana =============================
+# ========================================================================
+
+# Necessary to build my own image to run in others arch
+
+# Run Grafana
+
+kubectl -n openfaas run --image=lucet/grafana --port=3000 grafana
+kubectl create deployment grafana --image=lucet/grafana --port=3000 -n openfaas
+kubectl expose deploy/grafana --type ClusterIP -n openfaas --port 3000
+kubectl port-forward -n openfaas svc/grafana 3000:3000 &
+
+# ========================================================================
 # ========================== Build image in M1  ==========================
 # ========================================================================
 
