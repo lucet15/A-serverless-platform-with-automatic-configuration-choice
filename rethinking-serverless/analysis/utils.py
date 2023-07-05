@@ -186,15 +186,23 @@ def get_lhs_samples(cpu_limits, memory_limits, instance_types, seed=1, n_samples
     return lhs_samples
 
 def find_filename(directory, benchmark, data_name, mem, cpu, instance_type, return_if_exists=True):
+    print("find filenmae")
     filename1 = directory + benchmark + "_" + data_name + "_" + mem + "Mi_" + cpu + "m_" + instance_type + ".large.csv"
+    print("filename1 find " + filename1)
     filename2 = directory + benchmark + "_" + data_name + "_" + mem + "Mi_" + cpu + "m_" + instance_type + ".xlarge.csv" 
     # print(filename1, filename2)
+
+    
+
     filename = ''
     if os.path.exists(filename1): 
         filename = filename1
+        print("1")
     elif os.path.exists(filename2):
         filename = filename2 
+        print("2")
     else:
+        print("none")
         return None
     
     # NOTE: This is to make sure that configuration is working 
@@ -214,6 +222,15 @@ def get_result_from_data(benchmark, data_name, config, MEMORY_LIMITS, metric='ru
     mem = config["memory"]
     cpu = config["cpu"]
     instance_type = config["instance_type"]
+
+    print("directory " + directory)
+    print("benchmark " + benchmark)
+    print("data_name " + data_name)
+    print("mem " + mem)
+    print("cpu " + cpu)
+    print("instante type " + instance_type)
+
+#../data/transcode/transcode_cats-1_1024Mi_750m_m5.large.csv
 
     if MEMORY_LIMITS != None:
         return_if_exists = False
@@ -236,7 +253,9 @@ def get_result_from_data(benchmark, data_name, config, MEMORY_LIMITS, metric='ru
     if filename == None:
         print(filename)
         print(benchmark, data_name, mem, cpu, instance_type)
-
+    print("filename")
+    print(filename)
+    print("end filename")
     if os.stat(filename).st_size == 0:
         print("No data for this")
         return np.nan

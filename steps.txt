@@ -123,9 +123,7 @@ echo -n $PASSWORD | faas-cli login -g $OPENFAAS_URL -u admin --password-stdin
 # ==========
 # Delete cluster
 
-kubectl delete svc --namespace=openfaas gateway-external
-
-eksctl delete cluster --name openfaas-eks
+kubectl delete svc --namespace=openfaas gateway-external && eksctl delete cluster --name openfaas-eks
 
 # ==========
 # https://github.com/openfaas/faas-netes/blob/master/chart/openfaas/README.md

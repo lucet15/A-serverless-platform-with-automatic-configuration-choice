@@ -2,8 +2,8 @@ import random
 
 from skopt import Optimizer
 
-from analysis.utils import get_result_from_data 
-from analysis.optimizer.boskopt import Models
+from utils import get_result_from_data 
+from optimizer.boskopt import Models
 
 def get_random_samples(cpu_limits, memory_limits, instance_types, seed=1, n_samples=3):
     
@@ -49,6 +49,7 @@ def create_model(instance_types, cpu_limits, memory_limits, function_name, data_
     model = Models()
     model.create_model(function=function_name, base_estimator=base_estimator, seed=seed)
     for i in range(0, n_trials):
+        print("create model " + function_name, data_name, config, memory_limits)
         result = get_result_from_data(function_name, data_name, config, memory_limits)
 
         if result < minimum:
@@ -72,3 +73,5 @@ if __name__ == "__main__":
     # This assumes that there are data files corresponding to these configuration, function and data in data directory in the root of the project
     model: Models = create_model(instance_types=instance_types, cpu_limits=CPU_LIMITS, memory_limits=MEMORY_LIMITS, function_name="transcode", data_name="cats-1", n_trials=10, base_estimator="GP", seed=1, n_init_samples=3)
     predictions = model.get_all_config_predictions(function="transcode")
+
+    print(predictions)

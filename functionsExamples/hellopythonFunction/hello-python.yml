@@ -7,4 +7,3 @@ functions:
     lang: python
     handler: ./hello-python
     image: lucethello-python:latest
-

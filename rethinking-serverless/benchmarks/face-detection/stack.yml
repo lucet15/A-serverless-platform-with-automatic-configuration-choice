@@ -1,11 +1,11 @@
 provider:
   name: openfaas
-  gateway: http://127.0.0.1:8080
+  gateway: ab0c147993145459d98abd5773deec1a-864082524.eu-west-2.elb.amazonaws.com:8080
 functions:
   pigo-face-detector:
     lang: go
     handler: ./pigo-openfaas
-    image: mbilalce/face-detection:latest
+    image: lucet/face-detection:t3
     environment:
       input_mode: url
       output_mode: image
@@ -16,4 +16,4 @@ functions:
       memory: 3412Mi
       cpu: 1750m
     constraints:
-    - beta.kubernetes.io/instance-type=t3.small
+    - beta.kubernetes.io/instance-type=t3.nano
