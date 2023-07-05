@@ -65,7 +65,10 @@ def create_model(instance_types, cpu_limits, memory_limits, function_name, data_
     return model
 
 
-if __name__ == "__main__":
+
+def main():
+    print("Executing model")
+
     CPU_LIMITS= [ '250m', '500m', '750m', '1000m', '1250m', '1500m', '1750m', '2000m' ]
     MEMORY_LIMITS=[ '128Mi', '256Mi', '512Mi', '768Mi', '1024Mi', '2048Mi' ]
     instance_types = ['m5', 'm5a', 'c5', 'c5a', 'c6g', 'm6g']
@@ -75,3 +78,7 @@ if __name__ == "__main__":
     predictions = model.get_all_config_predictions(function="transcode")
 
     print(predictions)
+
+
+# if __name__ == "__main__":
+#     main()
