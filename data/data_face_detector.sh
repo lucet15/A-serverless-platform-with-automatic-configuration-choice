@@ -4,8 +4,15 @@
 
 source ../config.sh
 
-echo "==================== Face Detection ===================="
-cd ../rethinking-serverless/benchmarks/face-detection || ( ( echo "Error. Function does not exist" ) && exit )
+
+# Receives through the input the directory of the function's folder and the directory of the data's directory
+
+
+DIRECTORY=\$1
+DATA_DIRECTOTY=\$2
+
+echo "================== ===================="
+cd $DIRECTORY || ( ( echo "Error. Function does not exist" ) && exit )
 
 # Variables
 FUNCTION_NAME=$(basename -- *.yml)
@@ -18,13 +25,13 @@ instance_list=("m5.large" "m5a.large" "c5.large" "c5a.large" "c6g.medium" "m6g.m
 INSTANCE_TYPE=t3.nano
 
 echo Run function in a node with instace_type = "$INSTANCE_TYPE"
-python3 ../../../data/updateConfiguration.py "$FUNCTION_NAME" "$INSTANCE_TYPE"
+python3 DATA_DIRECTOTY/updateConfiguration.py "$FUNCTION_NAME" "$INSTANCE_TYPE"
 
-python3 ../../../data/updateURL.py "$FUNCTION_NAME" "$openfaas_url"
+python3 DATA_DIRECTORY/updateURL.py "$FUNCTION_NAME" "$openfaas_url"
 
-#python3 ../../../data/getFunctionYaml.py "$FUNCTION_NAME" > >(read -r faas_function)
+#python3 DATA_DIRECTORY/getFunctionYaml.py "$FUNCTION_NAME" > >(read -r faas_function)
 
-faas_function=$(python3 ../../../data/getFunctionYaml.py "$FUNCTION_NAME")
+faas_function=$(python3 DATA_DIRECTORY/getFunctionYaml.py "$FUNCTION_NAME")
 
 echo Function name = $faas_function
 
@@ -50,7 +57,7 @@ else
   echo Instance type does not exists
   echo Creating a new nodegroup with instance type "$INSTANCE_TYPE"
   
-  eksctl create nodegroup --region=$cluster_region --cluster=$cluster_name --node-type="$INSTANCE_TYPE" --nodes=2
+  eksctl create nodegroup --region=$cluster_region --cluster=$cluster_name --node-type="$INSTANCE_TYPE" --nodes=2 --node-volume-size=80
 
 fi
   

@@ -3,6 +3,8 @@ import sys
 
 functionFile = sys.argv[1]
 instance_type = sys.argv[2]
+cpu_limits = sys.args[3]
+memory_limits = sys.args[4]
 
 with open(functionFile, "r") as file:
     #yaml_content = yaml.safe_load(file)
@@ -11,6 +13,12 @@ with open(functionFile, "r") as file:
 # Modify the value in the YAML content
 functionName = list(yaml_content["functions"].keys())[0]
 content = yaml_content["functions"][functionName]
+
+
+content["limits"] = {
+    'memory:' + memory_limit,
+    'cpu:' + cpu_limit   
+}
 
 if "constraints" in content:
     print("ola")
