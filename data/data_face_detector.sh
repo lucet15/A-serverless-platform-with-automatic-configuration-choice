@@ -5,29 +5,33 @@
 source ../config.sh
 
 
-# Receives through the input the directory of the function's folder and the directory of the data's directory
+# Receives through the input the directory of the function's folder, the directory of the data's directory
 
 
-DIRECTORY=\$1
+FUNCTION_DIRECTORY=\$1
 DATA_DIRECTOTY=\$2
 
 echo "================== ===================="
-cd $DIRECTORY || ( ( echo "Error. Function does not exist" ) && exit )
+cd $FUNCTION_DIRECTORY || ( ( echo "Error. Function does not exist" ) && exit )
 
-# Variables
 FUNCTION_NAME=$(basename -- *.yml)
+
+# obter a data e guardar numa pasta data 
+# TODO fazer ficheiro para correr as varias configurações que estão em benchmarks
+# python3 diretoria do ficheiro/nome do ficheiro function_file, openfaas_url 
+
+INSTANCE_TYPE
 
 echo filename = $FUNCTION_NAME
 
 instance_list=("m5.large" "m5a.large" "c5.large" "c5a.large" "c6g.medium" "m6g.medium")
 
- # Vale a pena arescentar mais tipos de instancias?
-INSTANCE_TYPE=t3.nano
 
 echo Run function in a node with instace_type = "$INSTANCE_TYPE"
-python3 DATA_DIRECTOTY/updateConfiguration.py "$FUNCTION_NAME" "$INSTANCE_TYPE"
 
-python3 DATA_DIRECTORY/updateURL.py "$FUNCTION_NAME" "$openfaas_url"
+# python3 DATA_DIRECTOTY/updateConfiguration.py "$FUNCTION_NAME" "$INSTANCE_TYPE"
+
+# python3 DATA_DIRECTORY/updateURL.py "$FUNCTION_NAME" "$openfaas_url"
 
 #python3 DATA_DIRECTORY/getFunctionYaml.py "$FUNCTION_NAME" > >(read -r faas_function)
 
