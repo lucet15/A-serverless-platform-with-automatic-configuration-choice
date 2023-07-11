@@ -31,7 +31,15 @@ do
     do
 
       # Create a node cluster with this caracteristcs
-      eksctl create nodegroup --region=$cluster_region --cluster=$cluster_name --node-type=instance --nodes=2 --node-volume-size=80
+      echo Creating a node group with instante type = "$instante_types", memory limit = "$MEMORY_LIMITS" and cpu limits = "$CPU_LIMITS"
+
+      eksctl create nodegroup \ 
+	--region=$cluster_region \ 
+	--cluster=$cluster_name \
+	--name="$instante"+"$memory"+"$cpu" 
+	--node-type=instance \
+	--nodes=2 \
+	--node-volume-size=80
 
       python3 DATA_DIRECTOTY/updateConfiguration.py "$FUNCTION_NAME" "$instante" "$cpu" "$memory"
 
@@ -52,13 +60,24 @@ do
       for i in {1..5};
       do
         # CHAMAR A FUNCÂO
+        
+	echo Run the function for the "$i" time with input = "$INPUT"
         curl -i "$openfaas_url"/function/"$faas_function" --data "$INPUT"
       done
 
       # Export the data in csv
+
+      echo Exporting data from grafana
+      curl -u admin:admin -X GET "http://localhost:3000/api/datasources/proxy/1/query?db=my-database&q=SELECT%20*%20FROM%20my-measurement" --output "$1"/data/"$faas_function"_input_"$memory"Mi_"$cpu"m_"$intante".csv 
       
+      # Delete the node cluster
+  
+      echo Deleting node group with instance
+      eksctl delete nodegroup \
+     --cluster $cluster_name \
+     --region $cluster_region \
+     --name "$instante"+"$memory"+"$cpu"
 
     done
   done
-  # Delete the node cluster
 done
