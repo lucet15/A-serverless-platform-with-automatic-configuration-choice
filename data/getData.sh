@@ -12,6 +12,7 @@ source ../config.sh
 FUNCTION_DIRECTORY=\$1
 DATA_DIRECTOTY=\$2
 INPUT=\$3
+openfaas_url=$openfaas_url
 
 # Parameters
 
@@ -68,7 +69,10 @@ do
       # Export the data in csv
 
       echo Exporting data from grafana
-      curl -u admin:admin -X GET "http://localhost:3000/api/datasources/proxy/1/query?db=my-database&q=SELECT%20*%20FROM%20my-measurement" --output "$1"/data/"$faas_function"_input_"$memory"Mi_"$cpu"m_"$intante".csv 
+
+      python3 getMetrics.py faas_function "$instante" "$memory" "$cpu"
+
+      # response-time,DNS+dialup,DNS,Request-write,Response-delay,Response-read,status-code,offset
       
       # Delete the node cluster
   
