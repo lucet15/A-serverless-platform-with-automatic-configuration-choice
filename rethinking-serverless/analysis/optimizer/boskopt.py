@@ -300,7 +300,8 @@ class Models(BaseOptimizer):
         for config in _configs:
             transformed_conf = model.space.transform([config])
             Y = model.models[-1].predict(transformed_conf)
-
+            print(Y)
+            print("!!!!!!!!!!!!!!!")
             _results.append((Y[0], config))
 
         # _results.sort(key=operator.itemgetter(0))

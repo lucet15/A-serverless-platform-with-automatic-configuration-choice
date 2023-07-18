@@ -1,6 +1,6 @@
 provider:
   name: openfaas
-  gateway: ab0c147993145459d98abd5773deec1a-864082524.eu-west-2.elb.amazonaws.com:8080
+  gateway: ad108c269f8984f22b32b1ec24cc787b-1533626276.eu-west-2.elb.amazonaws.com:8080 
 functions:
   pigo-face-detector:
     lang: go
@@ -15,5 +15,3 @@ functions:
     limits:
       memory: 3412Mi
       cpu: 1750m
-    constraints:
-    - beta.kubernetes.io/instance-type=t3.nano

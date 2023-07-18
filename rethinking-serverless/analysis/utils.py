@@ -115,6 +115,7 @@ def calculate_cost(cpu, memory, time, instance_type):
     memory = float(memory.strip('Mi'))
 
     instance_family = instance_type.split('.')[0]
+    print(instance_family)
     exec_cost = cpu_cost[instance_family]*cpu*time + mem_cost[instance_family]*memory*time 
 
     return float(exec_cost)
