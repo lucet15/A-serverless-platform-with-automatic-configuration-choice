@@ -1,17 +1,19 @@
 provider:
   name: openfaas
-  gateway: ad108c269f8984f22b32b1ec24cc787b-1533626276.eu-west-2.elb.amazonaws.com:8080 
+  gateway: aa8a55cdd6f064a0daab9df664253420-501895266.eu-west-2.elb.amazonaws.com:8080 
+
 functions:
   pigo-face-detector:
     lang: go
     handler: ./pigo-openfaas
-    image: lucet/face-detection:t3
+    image: lucet/face-detection:t6
     environment:
-      input_mode: url
-      output_mode: image
+      input_mode: "url"
+      output_mode: "image"
       read_timeout: 600s
       write_timeout: 600s
       exec_timeout: 600s
-    limits:
+      
+    limits: 
       memory: 3412Mi
       cpu: 1750m

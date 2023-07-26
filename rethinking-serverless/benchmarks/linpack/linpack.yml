@@ -1,7 +1,7 @@
 version: 1.0
 provider:
   name: openfaas
-  gateway: http://127.0.0.1:8080
+  gateway: http://a99b729c1405a445c92cd63241bed40b-2028624405.eu-west-2.elb.amazonaws.com:8080 
 functions:
   linpack:
     lang: python3

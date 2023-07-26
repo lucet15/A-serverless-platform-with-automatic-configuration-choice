@@ -117,6 +117,19 @@ func Handle(req []byte) string {
 		output = val
 	}
 
+	dir, err := os.Getwd()
+	if err != nil {
+		fmt.Println("Error getting current directory: ", err)
+
+	}
+	fmt.Println("Current directory: ", dir)
+
+	if _, err := os.Stat("./data/facefinder"); os.IsNotExist(err) {
+		fmt.Println("File does not exist")
+	} else {
+		fmt.Println("File exists")
+	}
+
 	fd := NewFaceDetector("./data/facefinder", 20, 2000, 0.1, 1.1, 0.18)
 	faces, err := fd.DetectFaces(tmpfile.Name())
 

@@ -19,7 +19,7 @@ eksctl create cluster \
   --name $CLUSTER_NAME \
   --region $CLUSTER_REGION \
   --nodes 2 \
-  --node-type c6g.medium \
+  --node-type t3.large \
   --auto-kubeconfig
 
 if [ $? -eq 0 ]

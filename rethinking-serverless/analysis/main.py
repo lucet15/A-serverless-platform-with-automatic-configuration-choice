@@ -116,6 +116,23 @@ def main():
     print("paretoset_metrics")
     print(paretoset_metrics)
 
+
+    # Prompt the user for input
+    preference = eval(input("On a scale from 0 to 5, where 0 represents the maximum performance and 5 represents the minimum cost, please indicate your preference for the deployment of this function: "))
+
+    if isinstance(preference, (int, float)):
+        # Check if the value is between 0 and 5 (inclusive)
+        if 0 <= preference <= 5:
+            configuration = paretoset_configs[preference]
+            metrics = paretoset_metrics[preference]
+            print("For your preference, ti will be used: " + configuration + ", with this values: " + metrics)
+        else:
+            print("The variable is a number, but it's not between 0 and 5.")
+    else:
+        print("The variable is not a number.")
+
+
+
     """
     paretoset_configs, paretoset_metrics = get_pareto_front(metrics=metrics, configs=[{"m5.2xlarge", "200m"}, 
                                                                                     {"m5.2xlarge", "500m"}, 
