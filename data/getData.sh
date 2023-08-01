@@ -9,78 +9,124 @@ source ../config.sh
 
 # Receives through the input the directory of the function's folder, the directory of the data's directory
 
-FUNCTION_DIRECTORY=\$1
-DATA_DIRECTOTY=\$2
-INPUT=\$3
+# Directory to YAML file
+FUNCTION_DIRECTORY=$1 
+echo Function Directory "$FUNCTION_DIRECTORY"
+
+# DATA_DIRECTOTY=\$2
+
+# Function Input
+INPUT=$2
+echo Input "$INPUT"
+
+
 openfaas_url=$openfaas_url
 
 # Parameters
 
-CPU_LIMITS= ('250m', '500m', '750m', '1000m', '1250m', '1500m', '1750m', '2000m')
-MEMORY_LIMITS= ('128Mi', '256Mi', '512Mi', '768Mi', '1024Mi', '2048Mi')
-instance_types = ('m5', 'm5a', 'c5', 'c5a', 'c6g', 'm6g')
+CPU_LIMITS=('250m' '500m' '750m' '1000m' '1250m' '1500m' '1750m' '2000m')
+MEMORY_LIMITS=('128Mi' '256Mi' '512Mi' '768Mi' '1024Mi' '2048Mi')
+instance_types=('m5' 'm5a' 'c5' 'c5a' 'c6g' 'm6g')
 
-faas_function=$(python3 DATA_DIRECTORY/getFunctionYaml.py "$FUNCTION_NAME")
+# OpenFaas's function name
+faas_function=$(python3 getFunctionYaml.py "$FUNCTION_DIRECTORY")
+echo Function\'s name = "$faas_function"
+
 
 # Run all possible configurations
 
-for instace in $instance_types;
+for instance in "${instance_types[@]}";
 do
-  for memory in $MEMORY_LIMITS;
+  for memory in "${MEMORY_LIMITS[@]}";
   do
-    for cpu in $CPU_LIMITS;
+    for cpu in "${CPU_LIMITS[@]}";
     do
 
       # Create a node cluster with this caracteristcs
-      echo Creating a node group with instante type = "$instante_types", memory limit = "$MEMORY_LIMITS" and cpu limits = "$CPU_LIMITS"
+      echo Creating a node group with instante type = "$instance".large, memory limit = "$MEMORY_LIMITS" and cpu limits = "$CPU_LIMITS"
 
-      eksctl create nodegroup \ 
-	--region=$cluster_region \ 
-	--cluster=$cluster_name \
-	--name="$instante"+"$memory"+"$cpu" 
-	--node-type=instance \
-	--nodes=2 \
-	--node-volume-size=80
+      echo Cluster name = "$cluster_name", Region = "$cluster_region"
 
-      python3 DATA_DIRECTOTY/updateConfiguration.py "$FUNCTION_NAME" "$instante" "$cpu" "$memory"
+      nodegroup_name="$instance$memory$cpu"
+
+      echo "$nodegroup_name"
+
+
+
+      # eksctl create nodegroup --cluster="$cluster_name" --name="$instance-$memory-$cpu" --node-type="$instance.large" --nodes=2 --node-volume-size=80
+
+      if [ $? -eq 0 ]; then
+	 echo "Cluster Setup Completed with eksctl command."
+      else
+         echo "Cluster Setup Failed while running eksctl command."
+      fi
+
+      sleep 1
+
+
+
+      echo Function Directory = "$FUNCTION_DIRECTORY"
+      echo Instance Type = "$instance.large"
+      echo CPU = "$cpu"
+      echo memory = "$memory"
+
+      python3 updateConfiguration.py "$FUNCTION_DIRECTORY" "$instance.large" "$cpu" "$memory"
 
       # Deploy function
-      echo "Building the function..."
-      faas-cli build -f "$FUNCTION_NAME"
+      # echo "Building the function..."
+      # faas-cli build -f "$FUNCTION_NAME"
 
-      echo "Pushing the function..."
-      faas-cli push -f "$FUNCTION_NAME"
+      # echo "Pushing the function..."
+      # faas-cli push -f "$FUNCTION_NAME"
 
-      echo "Publishing the function..."
-      faas-cli publish -f "$FUNCTION_NAME" --platforms linux/arm/v7,linux/amd64
+      # echo "Publishing the function..."
+      # faas-cli publish -f "$FUNCTION_NAME" --platforms linux/arm/v7,linux/amd64
 
-      echo "Deploying the function..."
-      faas-cli deploy -f "$FUNCTION_NAME"
+      echo Deploying the function... "$faas_function"
+      faas-cli deploy -f "$FUNCTION_DIRECTORY"
+
+      url="$openfaas_url/function/$faas_function"
+      echo URL = "$url"
+
+      sleep 1
 
       # Run function several times
       for i in {1..5};
       do
         # CHAMAR A FUNCÂO
         
-	echo Run the function for the "$i" time with input = "$INPUT"
-        curl -i "$openfaas_url"/function/"$faas_function" --data "$INPUT"
+        url="$openfaas_url/function/$faas_function"
+
+        echo Run the function for the "$i" time with input = "$INPUT"
+        
+        response_headers=$(curl -i "$url" --data "$INPUT")
+
+	# Check if response is 200, save the response value
+
+	response_delay=$(echo "$response_headers" | grep -i "X-Duration-Seconds" | awk -F ': ' '{print $2}' | tr -d '\r')
+	echo "$faas_function,$response_delay"
+
+        status_code=$(echo "$response_headers" | grep -i "HTTP/1.1" | awk -F ' ' '{    print $2}' | tr -d '\r')
+        echo "$faas_function,$status_code"
+
+        echo "$response_delay,$status_code" >> "metrics/${faas_function}_${INPUT}_${memory}_${cpu}.csv"
+
       done
 
       # Export the data in csv
 
-      echo Exporting data from grafana
+      #echo Exporting data from grafana
 
-      python3 getMetrics.py faas_function "$instante" "$memory" "$cpu"
 
       # response-time,DNS+dialup,DNS,Request-write,Response-delay,Response-read,status-code,offset
       
       # Delete the node cluster
-  
+ 
       echo Deleting node group with instance
       eksctl delete nodegroup \
      --cluster $cluster_name \
      --region $cluster_region \
-     --name "$instante"+"$memory"+"$cpu"
+     --name $nodegroup_name
 
     done
   done

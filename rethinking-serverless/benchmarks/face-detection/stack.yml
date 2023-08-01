@@ -1,12 +1,12 @@
 provider:
   name: openfaas
-  gateway: aa8a55cdd6f064a0daab9df664253420-501895266.eu-west-2.elb.amazonaws.com:8080 
+  gateway: http://a5e806462dec441098e2699dfb159bd2-240217056.eu-west-2.elb.amazonaws.com:8080 
 
 functions:
   pigo-face-detector:
     lang: go
     handler: ./pigo-openfaas
-    image: lucet/face-detection:t6
+    image: mbilalce/face-detection:latest 
     environment:
       input_mode: "url"
       output_mode: "image"
