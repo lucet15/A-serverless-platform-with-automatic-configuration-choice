@@ -55,6 +55,24 @@ def updateURL(functionFile, openfaasURL):
         yaml.safe_dump(yaml_content, file, sort_keys=False)
 
 
+def getFunctionYaml(functionFile):
+    with open(functionFile, "r") as file:
+        #yaml_content = yaml.safe_load(file)
+        yaml_content = yaml.safe_load(file)
+
+    # Modify the value in the YAML content
+    function = [yaml_content["functions"].keys()][0]
+
+    functionName = next(iter(function))
+
+    # Save the modified content back to the file
+    with open(functionFile, "w") as file:
+        yaml.safe_dump(yaml_content, file, sort_keys=False)
+
+    return functionName
+
+
+
 def multiObjectiveDataframe(predictions):
 
     # Calculate cost for each instance_type
@@ -90,7 +108,9 @@ def main():
     # Parse the information
     functionFile = sys.argv[1]
     openfaasURL = sys.argv[2]
+    input = str(sys.argv[3])
 
+    # Instance configurations
     CPU_LIMITS= [ '250m', '500m', '750m', '1000m', '1250m', '1500m', '1750m', '2000m' ]
     MEMORY_LIMITS=[ '128Mi', '256Mi', '512Mi', '768Mi', '1024Mi', '2048Mi' ]
     instance_types = ['m5', 'm5a', 'c5', 'c5a', 'c6g', 'm6g']
@@ -99,17 +119,24 @@ def main():
     # Setup OpenFaas URL
     updateURL(functionFile, openfaasURL)
 
-    # Correr modelo
+    # Get OpenFaas's function
+    functionName = getFunctionYaml(functionFile)
+
+    # Run model
     print("Executing the main() function in create_model")
-    model: Models = create_model(instance_types=instance_types, cpu_limits=CPU_LIMITS, memory_limits=MEMORY_LIMITS, function_name="transcode", data_name="cats-1", n_trials=10, base_estimator="GP", seed=1, n_init_samples=3)
+    # model: Models = create_model(instance_types=instance_types, cpu_limits=CPU_LIMITS, memory_limits=MEMORY_LIMITS, function_name="transcode", data_name="cats-1", n_trials=10, base_estimator="GP", seed=1, n_init_samples=3)
+    model: Models = create_model(instance_types=instance_types, cpu_limits=CPU_LIMITS, memory_limits=MEMORY_LIMITS, function_name=functionName, data_name=input, n_trials=10, base_estimator="GP", seed=1, n_init_samples=3)
     print("Finished executing the main() function in create_model")
-    predictions = model.get_all_config_predictions(function="transcode")
+    predictions = model.get_all_config_predictions(function=functionName)
 
     print(predictions)
 
     paretoset_performance, configs = multiObjectiveDataframe(predictions)
 
     paretoset_configs, paretoset_metrics = get_pareto_front(paretoset_performance, configs)
+
+
+    # Show results from predictions
 
     print("paretoset_confis")
     print(paretoset_configs)

@@ -1,19 +1,19 @@
 provider:
   name: openfaas
-  gateway: http://a5e806462dec441098e2699dfb159bd2-240217056.eu-west-2.elb.amazonaws.com:8080 
-
+  gateway: ada3c91fc0dff43219db8fea771ff5c9-99299596.eu-west-2.elb.amazonaws.com:8080
 functions:
   pigo-face-detector:
     lang: go
     handler: ./pigo-openfaas
-    image: mbilalce/face-detection:latest 
+    image: mbilalce/face-detection:latest
     environment:
-      input_mode: "url"
-      output_mode: "image"
+      input_mode: url
+      output_mode: image
       read_timeout: 600s
       write_timeout: 600s
       exec_timeout: 600s
-      
-    limits: 
-      memory: 3412Mi
-      cpu: 1750m
+    limits:
+      memory: 2048Mi
+      cpu: 2000m
+    constraints:
+    - beta.kubernetes.io/instance-type=m6g.large
