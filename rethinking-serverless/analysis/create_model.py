@@ -19,7 +19,7 @@ def get_random_samples(cpu_limits, memory_limits, instance_types, seed=1, n_samp
 
     return random_samples
 
-def create_model(instance_types, cpu_limits, memory_limits, function_name, data_name, n_trials, base_estimator="GP", seed=1, n_init_samples=3):
+def create_model(dataDirectory, instance_types, cpu_limits, memory_limits, function_name, data_name, n_trials, base_estimator="GP", seed=1, n_init_samples=3):
     """
     Args:
         instance_types: list
@@ -50,16 +50,17 @@ def create_model(instance_types, cpu_limits, memory_limits, function_name, data_
     model.create_model(function=function_name, base_estimator=base_estimator, seed=seed)
     for i in range(0, n_trials):
         print("create model " + function_name, data_name, config, memory_limits)
-        result = get_result_from_data(function_name, data_name, config, memory_limits)
-
+        result = get_result_from_data(dataDirectory, function_name, data_name, config, memory_limits)
         if result < minimum:
             minimum = result
 
         model.update(config, result, function_name, success=True)
-        
+        print("model update ")
         if i < n_init_samples-1:
+            print("no if")
             config = init_samples[i+1]
         else:
+            print("no else")
             config = model.get_next_config(function_name)
         
     return model

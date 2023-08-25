@@ -1,6 +1,6 @@
 provider:
   name: openfaas
-  gateway: ada3c91fc0dff43219db8fea771ff5c9-99299596.eu-west-2.elb.amazonaws.com:8080
+  gateway: a86c4b78326494ab19a31870a72e4bbb-1832185824.eu-west-2.elb.amazonaws.com:8080
 functions:
   pigo-face-detector:
     lang: go

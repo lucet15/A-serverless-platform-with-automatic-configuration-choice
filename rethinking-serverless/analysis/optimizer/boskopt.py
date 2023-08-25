@@ -232,10 +232,12 @@ class Models(BaseOptimizer):
 
     def find_best(self, function, marker):
         model = self.models[function][marker]
-        # print(self.configs[function][marker])
+        print("=============== find best")
+        print(self.configs[function][marker])
 
         next_x = model.ask()
-
+        print("NEXT X = ")
+        print(next_x)
         # ic(next_x)
         return  {'instance_type': next_x[0], 'cpu': next_x[1],'memory': next_x[2]}
 
@@ -288,6 +290,7 @@ class Models(BaseOptimizer):
         return _results[:k]
 
     def get_all_config_predictions(self, function, marker='all'):
+        print("get all config ----------------")
         model = self.models[function][marker]
         _instance_types = self.configs[function][marker][0].categories
         _cpu =  self.configs[function][marker][1].categories

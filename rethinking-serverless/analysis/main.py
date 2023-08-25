@@ -3,10 +3,12 @@ from create_model import main, create_model
 from optimizer.boskopt import Models
 from utils import calculate_cost, calculate_cpu_mem_costs
 from paretofront import get_pareto_front
+from pathlib import Path
 
 import pandas as pd 
 import sys
 import yaml
+import os
 
 
 
@@ -92,8 +94,7 @@ def multiObjectiveDataframe(predictions):
            
 
             # print(cost, runtime)
-            paretoset_performance = paretoset_performance.append({"Function Runtime (s)": runtime,
-                                                                    "Function Exec. Cost ($)": cost}, ignore_index=True)
+            paretoset_performance = paretoset_performance.append({"Function Runtime (s)": runtime, "Function Exec. Cost ($)": cost}, ignore_index=True)
             
             configs.append({instance_type, cpu, memory}) 
 
@@ -108,7 +109,9 @@ def main():
     # Parse the information
     functionFile = sys.argv[1]
     openfaasURL = sys.argv[2]
-    input = str(sys.argv[3])
+    functionInput = str(sys.argv[3])
+    functionInputName = str(sys.argv[4])
+    # clusterName = str(sys.argv[5])
 
     # Instance configurations
     CPU_LIMITS= [ '250m', '500m', '750m', '1000m', '1250m', '1500m', '1750m', '2000m' ]
@@ -122,10 +125,24 @@ def main():
     # Get OpenFaas's function
     functionName = getFunctionYaml(functionFile)
 
+    # Path to data folder
+    data_path = "./data/"
+
+    print(data_path)
+    
+    # Check if metrics exist
+    if Path("./data/metrics/" + functionName).is_dir():
+        print("Directory ./data/metrics/" + functionName + "and metrics for the model exists.")
+    else:
+        print("Directory does not exist. Starting to get metrics to train the model...")
+        os.system("./data/getData.sh " + functionFile + " " + functionInput + " " + functionInputName)
+        print("data ready")
+
+
     # Run model
     print("Executing the main() function in create_model")
     # model: Models = create_model(instance_types=instance_types, cpu_limits=CPU_LIMITS, memory_limits=MEMORY_LIMITS, function_name="transcode", data_name="cats-1", n_trials=10, base_estimator="GP", seed=1, n_init_samples=3)
-    model: Models = create_model(instance_types=instance_types, cpu_limits=CPU_LIMITS, memory_limits=MEMORY_LIMITS, function_name=functionName, data_name=input, n_trials=10, base_estimator="GP", seed=1, n_init_samples=3)
+    model: Models = create_model("./data/metrics", instance_types=instance_types, cpu_limits=CPU_LIMITS, memory_limits=MEMORY_LIMITS, function_name=functionName, data_name=functionInputName, n_trials=10, base_estimator="GP", seed=1, n_init_samples=3)
     print("Finished executing the main() function in create_model")
     predictions = model.get_all_config_predictions(function=functionName)
 
@@ -146,6 +163,7 @@ def main():
 
     # Prompt the user for input
     preference = eval(input("On a scale from 0 to 5, where 0 represents the maximum performance and 5 represents the minimum cost, please indicate your preference for the deployment of this function: "))
+    #preference = input("On a scale from 0 to 5, where 0 represents the maximum performance and 5 represents the minimum cost, please indicate your preference for the deployment of this function: ")
 
     if isinstance(preference, (int, float)):
         # Check if the value is between 0 and 5 (inclusive)

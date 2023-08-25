@@ -188,6 +188,7 @@ def get_lhs_samples(cpu_limits, memory_limits, instance_types, seed=1, n_samples
 
 def find_filename(directory, benchmark, data_name, mem, cpu, instance_type, return_if_exists=True):
     print("find filenmae")
+    print("directory = " + directory)
     filename1 = directory + benchmark + "_" + data_name + "_" + mem + "Mi_" + cpu + "m_" + instance_type + ".large.csv"
     print("filename1 find " + filename1)
     filename2 = directory + benchmark + "_" + data_name + "_" + mem + "Mi_" + cpu + "m_" + instance_type + ".xlarge.csv" 
@@ -218,11 +219,16 @@ def find_filename(directory, benchmark, data_name, mem, cpu, instance_type, retu
         return None
 
 
-def get_result_from_data(benchmark, data_name, config, MEMORY_LIMITS, metric='runtime'):
-    directory = '../data/' + benchmark + '/'
+def get_result_from_data(dataDirectory, benchmark, data_name, config, MEMORY_LIMITS, metric='runtime'):
+    directory = dataDirectory + '/' + benchmark + '/'
+    print("DIRECTORY")
+    print(directory)
     mem = config["memory"]
+    print("mem utils = " + mem)
     cpu = config["cpu"]
+    print("cpu utils = " + cpu)
     instance_type = config["instance_type"]
+    print("instante utils = " + instance_type)
 
     print("directory " + directory)
     print("benchmark " + benchmark)
@@ -239,14 +245,24 @@ def get_result_from_data(benchmark, data_name, config, MEMORY_LIMITS, metric='ru
         return_if_exists = True
     
     filename = find_filename(directory, benchmark, data_name, mem, cpu, instance_type, return_if_exists=return_if_exists)
+    print("filename ==============")
+    print(filename)
+    print("end filename")
+
     if filename == None:
+        print("ENTROU")
         for m in MEMORY_LIMITS:
             m = m.strip('Mi')
+            print("ENTROU1")
             if int(m) > int(mem):
+                print("ENTROU2")
                 return 10000.0 
             
             filename = find_filename(directory, benchmark, data_name, m, cpu, instance_type, return_if_exists=return_if_exists)
+            print("DEVIA ENTRAR")
+            print(type(filename))
             if filename != None:
+                print("ENTROU3")
                 # print(filename)
                 break
         # return np.nan
@@ -254,9 +270,9 @@ def get_result_from_data(benchmark, data_name, config, MEMORY_LIMITS, metric='ru
     if filename == None:
         print(filename)
         print(benchmark, data_name, mem, cpu, instance_type)
-    print("filename")
+    print("filename ==============!!")
     print(filename)
-    print("end filename")
+    print("end filename!!ß")
     if os.stat(filename).st_size == 0:
         print("No data for this")
         return np.nan
@@ -279,6 +295,7 @@ def get_result_from_data(benchmark, data_name, config, MEMORY_LIMITS, metric='ru
     if metric != 'runtime':
         if result != 10000.0:
             result = calculate_cost(cpu, mem, median, instance_type)
+
     return result 
 
 def get_all_runtimes_costs_from_data(instance_types, CPU_LIMITS, MEMORY_LIMITS, benchmark, data_name, return_configs = False):    
