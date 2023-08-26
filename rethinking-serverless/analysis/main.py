@@ -11,10 +11,37 @@ import yaml
 import os
 
 
+def getInstanceSize(directory, benchmark, data_name, mem, cpu, instance_type):
+    # Get from data what type of machine is needed
+
+
+    filename_large = directory + "/" + benchmark + "/" + benchmark + "_" + data_name + "_" + mem + "_" + cpu + "_" + instance_type + ".large.csv"
+    filename_xlarge = directory + "/" + benchmark + "/" + benchmark + "_" + data_name + "_" + mem + "_" + cpu + "_" + instance_type + ".xlarge.csv" 
+
+    print("filename large")
+    print(filename_large)
+    print("filename xlarge")
+    print(filename_xlarge)
+
+    filename = ''
+    if os.path.exists(filename_large): 
+        filename = filename_large
+
+    elif os.path.exists(filename_xlarge):
+        filename = filename_xlarge
+
+    else:
+        print("Error")
+
+    parts = filename.split(".")
+    instance_size = parts[-2]
+
+    return instance_size
+
 
 def updateConfiguration(functionFile, instance_type, cpu_limit, memory_limit):
     # Update the configurations in the YAML file with model's output
-    
+
     with open(functionFile, "r") as file:
         #yaml_content = yaml.safe_load(file)
         yaml_content = yaml.safe_load(file)
@@ -25,12 +52,11 @@ def updateConfiguration(functionFile, instance_type, cpu_limit, memory_limit):
 
 
     content["limits"] = {
-        'memory:' + memory_limit,
-        'cpu:' + cpu_limit   
+        "memory": memory_limit,
+        "cpu": cpu_limit   
     }
 
     if "constraints" in content:
-        print("ola")
         content["constraints"][0] = "beta.kubernetes.io/instance-type=" + instance_type
 
     else: 
@@ -104,6 +130,25 @@ def multiObjectiveDataframe(predictions):
     return paretoset_performance, configs
 
 
+def splitConfiguration(configuration, cpu_limits, memory_limits, instance_types):
+    memory = ""
+    cpu = ""
+    instance = ""
+    for variable in configuration:
+        if str(variable) + "m" in cpu_limits:
+            cpu = str(variable) + "m"
+        elif str(variable) + "Mi" in memory_limits:
+            memory = str(variable) + "Mi"
+        elif variable in instance_types:
+            instance = str(variable)
+        else:
+            print("Error in split configuration")
+
+    configurations = {"memory": memory, "cpu": cpu, "instance": instance}
+
+    return configurations
+
+
 def main():
 
     # Parse the information
@@ -160,22 +205,43 @@ def main():
     print("paretoset_metrics")
     print(paretoset_metrics)
 
-
     # Prompt the user for input
-    preference = eval(input("On a scale from 0 to 5, where 0 represents the maximum performance and 5 represents the minimum cost, please indicate your preference for the deployment of this function: "))
-    #preference = input("On a scale from 0 to 5, where 0 represents the maximum performance and 5 represents the minimum cost, please indicate your preference for the deployment of this function: ")
+    while True:
+        try:
+            preference = eval(input("On a scale from 0 to 5, where 0 represents the maximum performance and 5 represents the minimum cost, please indicate your preference for the deployment of this function: "))
+            if isinstance(preference, (int, float)):
+                # Check if the value is between 0 and 5 (inclusive)
+                if 0 <= preference <= 5:
+                    index = paretoset_metrics.index[preference] # Get the index of the metrics, correspondent to the metrics array
+                    specific_config = paretoset_configs[preference]
 
-    if isinstance(preference, (int, float)):
-        # Check if the value is between 0 and 5 (inclusive)
-        if 0 <= preference <= 5:
-            configuration = paretoset_configs[preference]
-            metrics = paretoset_metrics[preference]
-            print("For your preference, ti will be used: " + configuration + ", with this values: " + metrics)
-        else:
-            print("The variable is a number, but it's not between 0 and 5.")
-    else:
-        print("The variable is not a number.")
+                    break  # exit the loop
+                else:
+                    print("The variable is a number, but it's not between 0 and 5.")
+            else:
+                print("The variable is not a number.")
+        except NameError:
+            print("The input was not a number. Please try again.")
 
+    configurations = splitConfiguration(specific_config, CPU_LIMITS, MEMORY_LIMITS, instance_types)
+
+    final_memory = configurations["memory"]
+    print("MEMORY")
+    print(final_memory)
+    final_cpu = configurations["cpu"]
+    print("CPU")
+    print(final_cpu)
+    final_instance = configurations["instance"]
+    print("INSTANCE")
+    print(final_instance)
+
+    print("For your preference, it will be used: memory = " + final_memory + ", cpu = " + final_cpu + " and instance type = " + final_instance )
+
+    instance_size = getInstanceSize("./data/metrics", functionName, functionInputName, final_memory, final_cpu, final_instance)
+
+    final_instance = final_instance + "." + instance_size
+
+    updateConfiguration(functionFile, final_instance, final_cpu, final_memory)
 
 
     """
@@ -197,46 +263,9 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
-
-
-"""
-To get 
-
-metrics = pd.DataFrame({"Function Runtime (s)": [10, 20, 15, 50], "Function Exec. Cost ($)": [10, 10, 2, 3]})
- for parento front
-
-def similar_to_pareto_front(paretoset, model, function_name, data_name, min_cost, min_runtime, threshold=0.1):
-    paretoset_performance =  pd.DataFrame(columns=["Function Runtime (s)", "Function Exec. Cost ($)", "Configs", "Data"])
-    predictions = model.get_all_config_predictions(function_name)
-    # print(predictions[0])
-    for index, row in paretoset.iterrows():
-        row_runtime = row["Function Runtime (s)"]
-        row_cost = row["Function Exec. Cost ($)"]
-        for prediction in predictions:
-            runtime = prediction[0]/min_runtime 
-            instance_type, cpu, memory = prediction[1]
-            cost = calculate_cost(cpu, memory, prediction[0], instance_type)/min_cost
-            if ((1-threshold)* row_runtime <= runtime) and (runtime <= (1+ threshold) * row_runtime) and \
-                ((1-threshold)* row_cost <= cost) and (cost <= (1+ threshold) * row_cost):
-                # print(prediction[1])
-                # print(cost, runtime)
-                config = {'instance_type': instance_type, 'cpu': cpu, 'memory': memory}
-                runtime = get_result_from_data(function_name, data_name, config, MEMORY_LIMITS)
-                cost = calculate_cost(cpu, memory, runtime, instance_type)
-                # print(cost, runtime)
-                cost = cost/min_cost
-                runtime = runtime/min_runtime
-
-                # print(cost, runtime)
-                paretoset_performance = paretoset_performance.append({"Function Runtime (s)": runtime,
-                                                                      "Function Exec. Cost ($)": cost, 
-                                                                      "Configs": instance_type + '_' + cpu + '_' + memory,
-                                                                      "Data": data_name}, ignore_index=True)
     
-    paretoset_performance.drop_duplicates(inplace=True)
-    return paretoset_performance
+    print("Function is ready to be deployed")
 
-"""
+
+
+

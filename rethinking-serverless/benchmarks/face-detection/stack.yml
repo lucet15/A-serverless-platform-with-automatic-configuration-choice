@@ -13,7 +13,7 @@ functions:
       write_timeout: 600s
       exec_timeout: 600s
     limits:
-      memory: 2048Mi
-      cpu: 2000m
+      memory: 128Mi
+      cpu: 750m
     constraints:
-    - beta.kubernetes.io/instance-type=m6g.large
+    - beta.kubernetes.io/instance-type=c5a.large
