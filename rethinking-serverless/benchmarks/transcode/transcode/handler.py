@@ -15,7 +15,7 @@ def handle(req):
     ffmpeg.input(in_filename).output(out_filename).overwrite_output().run()
 
     s3 = boto3.resource('s3')
-    BUCKET = "faas-testing"
+    BUCKET = "s3openfaas"
 
     s3.Bucket(BUCKET).upload_file(out_filename, 'video/output/'+out_filename)
 

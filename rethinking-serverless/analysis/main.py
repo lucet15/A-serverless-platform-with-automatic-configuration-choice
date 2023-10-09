@@ -1,9 +1,11 @@
 #from helpers import create_model
+import json
 from create_model import main, create_model
 from optimizer.boskopt import Models
 from utils import calculate_cost, calculate_cpu_mem_costs
 from paretofront import get_pareto_front
 from pathlib import Path
+import time
 
 import pandas as pd 
 import sys
@@ -151,10 +153,15 @@ def splitConfiguration(configuration, cpu_limits, memory_limits, instance_types)
 
 def main():
 
+    start_time = time.time()
+
     # Parse the information
     functionFile = sys.argv[1]
     openfaasURL = sys.argv[2]
     functionInput = str(sys.argv[3])
+
+        
+
     functionInputName = str(sys.argv[4])
     # clusterName = str(sys.argv[5])
 
@@ -164,11 +171,18 @@ def main():
     instance_types = ['m5', 'm5a', 'c5', 'c5a', 'c6g', 'm6g']
 
 
+
     # Setup OpenFaas URL
     updateURL(functionFile, openfaasURL)
 
     # Get OpenFaas's function
     functionName = getFunctionYaml(functionFile)
+    
+    #if functionName in ("s3", "transcode"):
+     #   functionInput = json.dumps(json.loads(sys.argv[3].strip("'")))
+      #  print("ENTROU")
+
+    print("Function Input = " + functionInput)
 
     # Path to data folder
     data_path = "./data/"
@@ -180,14 +194,22 @@ def main():
         print("Directory ./data/metrics/" + functionName + "and metrics for the model exists.")
     else:
         print("Directory does not exist. Starting to get metrics to train the model...")
-        os.system("./data/getData.sh " + functionFile + " " + functionInput + " " + functionInputName)
-        print("data ready")
+        start_time = time.time()
+        command = f"./data/getData.sh {functionFile} '{functionInput}' {functionInputName}"
+        #command = "./data/getData.sh " + functionFile + " " + functionInput + " " + functionInputName
+        os.system(command)
+        
+
+
+        #print("data ready")
+
 
 
     # Run model
     print("Executing the main() function in create_model")
-    # model: Models = create_model(instance_types=instance_types, cpu_limits=CPU_LIMITS, memory_limits=MEMORY_LIMITS, function_name="transcode", data_name="cats-1", n_trials=10, base_estimator="GP", seed=1, n_init_samples=3)
-    model: Models = create_model("./data/metrics", instance_types=instance_types, cpu_limits=CPU_LIMITS, memory_limits=MEMORY_LIMITS, function_name=functionName, data_name=functionInputName, n_trials=10, base_estimator="GP", seed=1, n_init_samples=3)
+
+    model: Models = create_model("./data/metrics", instance_types=instance_types, cpu_limits=CPU_LIMITS, memory_limits=MEMORY_LIMITS, function_name=functionName, data_name=functionInputName, n_trials=35, base_estimator="GP", seed=10, n_init_samples=5)
+    
     print("Finished executing the main() function in create_model")
     predictions = model.get_all_config_predictions(function=functionName)
 
@@ -195,15 +217,54 @@ def main():
 
     paretoset_performance, configs = multiObjectiveDataframe(predictions)
 
-    paretoset_configs, paretoset_metrics = get_pareto_front(paretoset_performance, configs)
+    testing = "./data/paretoPlots/trials"
+
+    if Path(testing).is_dir():
+        print("Directory" + testing + "exists.")
+    else:
+        os.mkdir(testing)
+
+    paretoset_configs, paretoset_metrics = get_pareto_front(functionName,paretoset_performance, configs, sense=["min", "min"]) # Max performance and mim cost
 
 
+    # sense(runtime, cost)
     # Show results from predictions
 
     print("paretoset_confis")
     print(paretoset_configs)
     print("paretoset_metrics")
     print(paretoset_metrics)
+
+
+
+
+    end_time = time.time()
+
+    elapsed_time = end_time - start_time
+
+    directory = "./data/time/initSample_cost_time/"
+
+    if Path(directory).is_dir():
+        print("Directory" + directory + "exists.")
+    else:
+        os.mkdir(directory)
+
+    with open(directory + "execution_time_5_initSamples_"+ functionName + ".txt", "w") as file:
+        file.write(str(elapsed_time))
+
+    with open("./quality_model/" + functionName + ".txt", 'w') as f:
+
+    #with open("./data/metricsConfigurations" + functionName + "_predictions.txt", 'w') as f:
+        # Write the column headers
+        f.write('paretoset_configs\tparetoset_metrics\n')
+
+        # Write the data
+        for configs, (index, metrics) in zip(paretoset_configs, paretoset_metrics.iterrows()):
+            config_str = ', '.join(configs) # Convert set to string
+            metrics_str = ', '.join(metrics.astype(str)) # Convert metrics to string
+            f.write(f'{config_str}\t{metrics_str}\n')
+
+    
 
     # Prompt the user for input
     while True:
@@ -242,6 +303,8 @@ def main():
     final_instance = final_instance + "." + instance_size
 
     updateConfiguration(functionFile, final_instance, final_cpu, final_memory)
+
+
 
 
     """

@@ -1,0 +1,9 @@
+pareto front plots, basic is the default
+each folder change some values
+
+the times of execution are ../time
+
+old files "basic", with 20 trials are now in trials_cost_time
+
+
+paretoMetrics.py - pareto front of all configurations obtain in the metrics

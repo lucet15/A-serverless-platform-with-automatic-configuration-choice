@@ -2,8 +2,9 @@ from typing import Any, List, Tuple
 from paretoset import paretoset
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt  # Import matplotlib
 
-def get_pareto_front(metrics: pd.DataFrame, configs: List[Any], sense=["min", "min"]) -> Tuple[Any, Any]:
+def get_pareto_front(functionName, metrics: pd.DataFrame, configs: List[Any], sense=["min", "min"]) -> Tuple[Any, Any]:
     """
     Returns the pareto front
     Args:
@@ -23,13 +24,51 @@ def get_pareto_front(metrics: pd.DataFrame, configs: List[Any], sense=["min", "m
 
     # Calculate the mask for pareto front
     # Mask has true for elements that are part of paretoset / pareto front
+    print("====================================")
+    print(metrics)
+    print(type(metrics))
+    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    metrics['Function Runtime (s)'] = pd.to_numeric(metrics['Function Runtime (s)'], errors='coerce')
+    metrics['Function Exec. Cost ($)'] = pd.to_numeric(metrics['Function Exec. Cost ($)'], errors='coerce')
+
     mask = paretoset(costs=metrics, sense=sense)
+    print("mask")
+    print(mask)
     metrics_paretoset = metrics[mask]
+    print("metrics_paretoset")
+    print(metrics_paretoset)
     
     configs = np.array(configs)
+    print("configs")
+    print(configs)
     configs_paretoset = configs[mask]
+    print("configs_paretoset")
+    print(configs_paretoset)
 
+
+    file_path = "./quality_model/" + functionName + "_prediction.csv"
+    file = open(file_path, 'w')
+
+    metrics_paretoset.to_csv(file_path, index=False)
+
+
+    # Create a scatter plot of the Pareto front
+    plt.figure(figsize=(8, 6))
+    plt.scatter(metrics_paretoset["Function Runtime (s)"], metrics_paretoset["Function Exec. Cost ($)"])
+
+    plt.xlabel("Function Runtime (s)")
+    plt.ylabel("Function Exec. Cost ($)")
+    plt.title("Pareto Front")
+
+    #plt.show()
+
+    plt.savefig("./data/paretoPlots/basic/" + functionName + ".png")  # You can specify the desired file format (e.g., .png, .jpg, .pdf)
+
+    #plt.savefig("./data/paretoPlots/trials/pareto_" + functionName + "_35_trials.png")  # You can specify the desired file format (e.g., .png, .jpg, .pdf)
+    #plt.savefig("./data/paretoPlots/initSamples/pareto_" + functionName + "_5_initSamples.png")  # You can specify the desired file format (e.g., .png, .jpg, .pdf)
+    
     return configs_paretoset, metrics_paretoset
+
 
 
 if __name__ == "__main__":

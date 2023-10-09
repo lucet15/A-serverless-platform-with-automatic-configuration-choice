@@ -5,7 +5,7 @@ from skopt import Optimizer
 from utils import get_result_from_data 
 from optimizer.boskopt import Models
 
-def get_random_samples(cpu_limits, memory_limits, instance_types, seed=1, n_samples=3):
+def get_random_samples(cpu_limits, memory_limits, instance_types, seed=1, n_samples=5):
     
     random_samples = []
     random.seed(seed)
@@ -19,7 +19,7 @@ def get_random_samples(cpu_limits, memory_limits, instance_types, seed=1, n_samp
 
     return random_samples
 
-def create_model(dataDirectory, instance_types, cpu_limits, memory_limits, function_name, data_name, n_trials, base_estimator="GP", seed=1, n_init_samples=3):
+def create_model(dataDirectory, instance_types, cpu_limits, memory_limits, function_name, data_name, n_trials, base_estimator="GP", seed=1, n_init_samples=5):
     """
     Args:
         instance_types: list
@@ -40,6 +40,7 @@ def create_model(dataDirectory, instance_types, cpu_limits, memory_limits, funct
             Seed for random number generator for reproducibility and generation of random samples
     """
     minimum = 600.0
+    print(dataDirectory)
 
     init_samples = get_random_samples(cpu_limits, memory_limits, instance_types, seed=seed)
 
@@ -55,12 +56,9 @@ def create_model(dataDirectory, instance_types, cpu_limits, memory_limits, funct
             minimum = result
 
         model.update(config, result, function_name, success=True)
-        print("model update ")
         if i < n_init_samples-1:
-            print("no if")
             config = init_samples[i+1]
         else:
-            print("no else")
             config = model.get_next_config(function_name)
         
     return model

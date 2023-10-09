@@ -9,4 +9,3 @@ ipykernel==6.15.1
 joblib==1.1.0
 paretoset==1.2.0
 numpy==1.19.5 #
-python-openfaas

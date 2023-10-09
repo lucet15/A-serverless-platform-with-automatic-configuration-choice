@@ -290,7 +290,6 @@ class Models(BaseOptimizer):
         return _results[:k]
 
     def get_all_config_predictions(self, function, marker='all'):
-        print("get all config ----------------")
         model = self.models[function][marker]
         _instance_types = self.configs[function][marker][0].categories
         _cpu =  self.configs[function][marker][1].categories
@@ -303,8 +302,6 @@ class Models(BaseOptimizer):
         for config in _configs:
             transformed_conf = model.space.transform([config])
             Y = model.models[-1].predict(transformed_conf)
-            print(Y)
-            print("!!!!!!!!!!!!!!!")
             _results.append((Y[0], config))
 
         # _results.sort(key=operator.itemgetter(0))

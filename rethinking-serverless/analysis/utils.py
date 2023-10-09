@@ -111,11 +111,27 @@ def spot_pricing(discount_factor=0.8):
     # calculate_cpu_mem_costs(spot_costs_intel, spot_costs_arm, spot_costs_amd)
 
 def calculate_cost(cpu, memory, time, instance_type):
+
+    print(cpu)
+    print(time)
+    print(memory)
+    print("instance")
+    print(instance_type)
+
+
     cpu = float(cpu.strip('m'))/1000.0
     memory = float(memory.strip('Mi'))
 
     instance_family = instance_type.split('.')[0]
     print(instance_family)
+
+    print("NO UTILS")
+    print(type(cpu))
+    print(type(time))
+    print(type(memory))
+
+    print(cpu_cost[instance_family])
+    print(mem_cost[instance_family])
     exec_cost = cpu_cost[instance_family]*cpu*time + mem_cost[instance_family]*memory*time 
 
     return float(exec_cost)
@@ -245,24 +261,15 @@ def get_result_from_data(dataDirectory, benchmark, data_name, config, MEMORY_LIM
         return_if_exists = True
     
     filename = find_filename(directory, benchmark, data_name, mem, cpu, instance_type, return_if_exists=return_if_exists)
-    print("filename ==============")
-    print(filename)
-    print("end filename")
 
     if filename == None:
-        print("ENTROU")
         for m in MEMORY_LIMITS:
             m = m.strip('Mi')
-            print("ENTROU1")
             if int(m) > int(mem):
-                print("ENTROU2")
                 return 10000.0 
             
             filename = find_filename(directory, benchmark, data_name, m, cpu, instance_type, return_if_exists=return_if_exists)
-            print("DEVIA ENTRAR")
-            print(type(filename))
             if filename != None:
-                print("ENTROU3")
                 # print(filename)
                 break
         # return np.nan
@@ -270,9 +277,6 @@ def get_result_from_data(dataDirectory, benchmark, data_name, config, MEMORY_LIM
     if filename == None:
         print(filename)
         print(benchmark, data_name, mem, cpu, instance_type)
-    print("filename ==============!!")
-    print(filename)
-    print("end filename!!ß")
     if os.stat(filename).st_size == 0:
         print("No data for this")
         return np.nan

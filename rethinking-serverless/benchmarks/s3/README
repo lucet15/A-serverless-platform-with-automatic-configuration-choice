@@ -1,0 +1,29 @@
+{
+  "input_bucket": "s3-openfaas",
+  "object_key": "s3-openfaas/cats-1.mp4",
+  "output_bucket": "s3-openfaas"
+}
+
+python3 main.py ../benchmarks/s3/s3.yml a936a98333f914cf7a2032b74314b1ff-980195754.eu-west-2.elb.amazonaws.com:8080 '{"input_bucket":"s3openfaas","object_key":"cats-1.mp4","output_bucket":"s3openfaas"}' cats-1
+
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": [
+                "s3:PutObject",
+                "s3:PutObjectAcl",
+                "s3:GetObject",
+                "s3:GetObjectAcl",
+                "s3:DeleteObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::s3-openfaas",
+                "arn:aws:s3:::s3-openfaas/*"
+            ]
+        }
+    ]
+}

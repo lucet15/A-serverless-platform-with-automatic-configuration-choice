@@ -28,15 +28,15 @@ MEMORY_LIMITS=('128Mi' '256Mi' '512Mi' '768Mi' '1024Mi' '2048Mi')
 instance_types=('m5' 'm5a' 'c5' 'c5a' 'c6g' 'm6g')
 
 # OpenFaas's function name
-faas_function=$(python3 getFunctionYaml.py "$FUNCTION_DIRECTORY")
+faas_function=$(python3 ./data/getFunctionYaml.py "$FUNCTION_DIRECTORY")
 echo Function\'s name = "$faas_function"
 
-dir="metrics/${faas_function}"
+dir="./data/metrics/${faas_function}"
 mkdir -p "$dir"
 
 
-if [ ! -d "metrics/${faas_function}" ]; then
-  mkdir "metrics/${faas_function}"
+if [ ! -d "./data/metrics/${faas_function}" ]; then
+  mkdir "./data/metrics/${faas_function}"
 fi
 
 # Run all possible configurations
@@ -78,7 +78,7 @@ do
       echo CPU = "$cpu"
       echo memory = "$memory"
 
-      python3 updateConfiguration.py "$FUNCTION_DIRECTORY" "$instance.$machine" "$cpu" "$memory"
+      python3 ./data/updateConfiguration.py "$FUNCTION_DIRECTORY" "$instance.$machine" "$cpu" "$memory"
 
       echo Deploying the function... "$faas_function"
       faas-cli deploy -f "$FUNCTION_DIRECTORY"
@@ -114,11 +114,11 @@ do
 	echo $(pwd)
 
 if [ "$i" -eq 1 ]; then
-	  echo Response-delay,status-code >> "metrics/${faas_function}/${faas_function}_${INPUT_NAME}_${memory}_${cpu}_${instance}.${machine}.csv"
+	  echo Response-delay,status-code >> "./data/metrics/${faas_function}/${faas_function}_${INPUT_NAME}_${memory}_${cpu}_${instance}.${machine}.csv"
 	fi	
 
-        echo "$response_delay,$status_code" >> "metrics/${faas_function}/${faas_function}_${INPUT_NAME}_${memory}_${cpu}_${instance}.${machine}.csv"
-        echo Saved in "metrics/${faas_function}/${faas_function}_${INPUT_NAME}_${memory}_${cpu}_${instance}.${machine}.csv"
+        echo "$response_delay,$status_code" >> "./data/metrics/${faas_function}/${faas_function}_${INPUT_NAME}_${memory}_${cpu}_${instance}.${machine}.csv"
+        echo Saved in "./data/metrics/${faas_function}/${faas_function}_${INPUT_NAME}_${memory}_${cpu}_${instance}.${machine}.csv"
       done
 
     done

@@ -1,7 +1,7 @@
 version: 1.0
 provider:
   name: openfaas
-  gateway: http://127.0.0.1:8080
+  gateway: abe46901ccf614ff1a251dd21a360a71-456606304.eu-west-2.elb.amazonaws.com:8080
 functions:
   s3-notime:
     lang: python3
@@ -11,7 +11,8 @@ functions:
       read_timeout: 600s
       write_timeout: 600s
       exec_timeout: 600s
-    limits: 
-      memory: 128Mi
-      cpu: 1000m
-
+    limits:
+      memory: 2048Mi
+      cpu: 2000m
+    constraints:
+    - beta.kubernetes.io/instance-type=m6g.xlarge
