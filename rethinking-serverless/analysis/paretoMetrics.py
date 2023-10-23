@@ -5,6 +5,8 @@ import glob
 
 from paretofront import get_pareto_front
 from utils import calculate_cost, calculate_cpu_mem_costs
+from adjustText import adjust_text
+
 
 def splitConfiguration(configuration, cpu_limits, memory_limits, instance_types):
     print("INICIO")
@@ -79,7 +81,7 @@ def multiObjectiveDataframe(predictions):
 
 def main():
     # Change the function's name
-    functionName = "linpack"
+    functionName = "s3"
     path = "./data/metrics/" + functionName
 
     df = pd.DataFrame(columns=['Function Runtime', 'Configurations'])
@@ -125,17 +127,83 @@ def main():
 
     paretoset_configs, metrics_paretoset = get_pareto_front(functionName,paretoset_performance, configs, sense=["min", "min"]) # Max performance and mim cost
 
+    texts = []
+    texts_check = []
+    #config_dict = {tuple(config): chr(i+77) for i, config in enumerate(paretoset_configs)}
+    config_dict = {tuple(config): chr(i + 97) for i, config in enumerate(paretoset_configs)}
+
+    metrics_paretoset = metrics_paretoset.reset_index(drop=True)
 
 
-    plt.scatter(metrics_paretoset["Function Runtime (s)"], metrics_paretoset["Function Exec. Cost ($)"])
-    plt.xlabel("Function Runtime (s)")
-    plt.ylabel("Function Exec. Cost ($)")
+    print("METRICS")
+    print(metrics_paretoset)
+    print(paretoset_configs)
+    
+    # for i in range(len(metrics_paretoset)):
+    #     if i == 0:
+    #         # Add the label only for the first point
+    #         plt.scatter(metrics_paretoset["Function Runtime (s)"][i], metrics_paretoset["Function Exec. Cost ($)"][i], marker='o', color='red')
+    #     else:
+    #         if (paretoset_configs[i] in texts_check):
+    #             continue
+    #         plt.scatter(metrics_paretoset["Function Runtime (s)"][i], metrics_paretoset["Function Exec. Cost ($)"][i], marker='o', color='red')
+
+    #     print("###########")
+    #     print(paretoset_configs[i])
+    #     print(config_dict)
+    #     print(config_dict.get(paretoset_configs[i]))
+        
+    #     texts.append(plt.text(metrics_paretoset["Function Runtime (s)"][i] + 0.0, metrics_paretoset["Function Exec. Cost ($)"][i], config_dict.get(paretoset_configs[i])))
+    #     texts_check.append(paretoset_configs[i])
+
+    current_config = ()
+
+    for i in range(len(metrics_paretoset)):
+        current_config = tuple(paretoset_configs[i])
+        if i == 0:
+            # Add the label only for the first point
+            plt.scatter(metrics_paretoset["Function Runtime (s)"][i], metrics_paretoset["Function Exec. Cost ($)"][i], marker='o', color='red')
+
+            
+        else:
+            if (current_config in texts_check):
+                continue
+            plt.scatter(metrics_paretoset["Function Runtime (s)"][i], metrics_paretoset["Function Exec. Cost ($)"][i], marker='o', color='red')
+
+
+        texts.append(plt.text(metrics_paretoset["Function Runtime (s)"][i] + 0.0, metrics_paretoset["Function Exec. Cost ($)"][i], config_dict.get(current_config)))
+        texts_check.append(current_config)
+
+    points = sorted(zip(metrics_paretoset["Function Runtime (s)"], metrics_paretoset["Function Exec. Cost ($)"]), key=lambda point: point[0])
+
+    # Unpack your sorted points
+    x_sorted, y_sorted = zip(*points)
+
+    # Plot a line connecting the points
+    plt.plot(x_sorted, y_sorted, color='red', label='Pareto Front Line')
+
+
+
+    adjust_text(texts)
+
+    print("TEXTS")
+    print(texts)
+
+    plt.xlim([0.83, 1.1])
+    plt.ylim([0.15*1e-5, 1.9*1e-5])
+    
+    plt.xlabel("Function Execution Time")
+    plt.ylabel("Function Execution Cost")
+
+    #plt.plot(metrics_paretoset["Function Runtime (s)"], metrics_paretoset["Function Exec. Cost ($)"], '-o')
 
     #plt.show()
 
     plt.savefig("./data/paretoPlots/paretoMetricsPlot/" + functionName + ".png")  # You can specify the desired file format (e.g., .png, .jpg, .pdf)
 
-
+    with open("./data/paretoPlots/paretoMetricsPlot/" + functionName + ".txt", "w") as file:
+        file.write(str(config_dict))
+        file.write(str(metrics_paretoset))
 
 if __name__ == "__main__":
     main()

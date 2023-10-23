@@ -5,7 +5,7 @@ from skopt import Optimizer
 from utils import get_result_from_data 
 from optimizer.boskopt import Models
 
-def get_random_samples(cpu_limits, memory_limits, instance_types, seed=1, n_samples=5):
+def get_random_samples(cpu_limits, memory_limits, instance_types, seed=1, n_samples=15):
     
     random_samples = []
     random.seed(seed)
@@ -19,7 +19,7 @@ def get_random_samples(cpu_limits, memory_limits, instance_types, seed=1, n_samp
 
     return random_samples
 
-def create_model(dataDirectory, instance_types, cpu_limits, memory_limits, function_name, data_name, n_trials, base_estimator="GP", seed=1, n_init_samples=5):
+def create_model(dataDirectory, instance_types, cpu_limits, memory_limits, function_name, data_name, n_trials, base_estimator="GP", seed=1, n_init_samples=15):
     """
     Args:
         instance_types: list

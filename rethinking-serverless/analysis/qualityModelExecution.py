@@ -2,12 +2,14 @@ import csv
 import glob
 import os
 import sys
+import numpy as np
 import pandas as pd
 import yaml
 import matplotlib.image as mpimg
 import matplotlib.pyplot as plt
 import re
 
+from adjustText import adjust_text
 from paretofront import get_pareto_front
 from utils import calculate_cost, calculate_cpu_mem_costs
 
@@ -29,9 +31,15 @@ def splitConfiguration(configuration, cpu_limits, memory_limits, instance_types)
         if str(variable) + "m" in cpu_limits:
             print("cpu")
             cpu = str(variable) + "m"
+        elif str(variable) in cpu_limits:
+            print("cpu")
+            cpu = str(variable)
         elif str(variable) + "Mi" in memory_limits:
             print("memory")
             memory = str(variable) + "Mi"
+        elif str(variable) in memory_limits:
+            print("memory")
+            memory = str(variable)
         elif str(variable) in instance_types:
             print("instance")
             instance = str(variable)
@@ -243,12 +251,22 @@ def main():
     #dfPredictions_initial[['Function Runtime (s)', 'Function Exec. Cost ($)']] = dfPredictions_initial['paretoset_metrics'].str.split(',', expand=True)
     paretoset_configs = dfPredictions_initial['paretoset_configs'].tolist()
 
+    configuration_predictions = []
+
+    for configPredict in paretoset_configs:
+        var = splitConfiguration(configPredict, CPU_LIMITS, MEMORY_LIMITS, instance_types)
+        print(var)
+        configuration_predictions.append((var["memory"], var["cpu"], var["instance"]))
+
+
     print("DFPRETICTIONS")
     print(dfPredictions)
 
     print("PARETO CONFIGS")
     print(paretoset_configs)
-    
+
+
+
     data = []
 
     folder = "./data/metrics/" + functionName
@@ -258,6 +276,8 @@ def main():
         print("NO FOR")
         print(configuration)
         config = splitConfiguration(configuration, CPU_LIMITS, MEMORY_LIMITS, instance_types)
+
+        #configuration_predictions.append((config["memory"], config["cpu"], config["instance"]))
 
         # Create the search pattern
         search_pattern = folder + "/{}_{}_{}_{}_{}.large.csv".format(functionName, functionInputName, config["memory"], config["cpu"], config["instance"])
@@ -297,20 +317,6 @@ def main():
 
 
 
-
-
-
-    # Convert txt real valus to data
-    #with open("./data/metricsConfigurations/" + functionName + "_real.txt", "r") as file:
-    #    lines = file.read().split("\n")
-    #    for line in lines:
-    #        elements = line.split(",")
-    #        if len(line.strip()) != 0:
-    #            data.append(elements)
-
-    #print("DATA ________________________-")
-    #print(data)
-
     # To real values
     paretoset_performance, configs = multiObjectiveDataframe(data)
 
@@ -321,18 +327,97 @@ def main():
 
     plt.figure(figsize=(8, 6))
 
+    configOrganized = [] # To real values
+
+
+    configs = [tuple(config) for config in configs]
+    for configurationTuple in configs:
+        var = splitConfiguration(configurationTuple, CPU_LIMITS, MEMORY_LIMITS, instance_types)
+        print(var)
+        configOrganized.append((var["memory"], var["cpu"], var["instance"]))
+
+
+    config_dict = {config: chr(i+85) for i, config in enumerate(configOrganized)}
+    texts = [] # to store your annotations
+    texts_check = []
+    
+    # For predictions, dfPredictions and paretoset_configs
+
+    for i in range(len(dfPredictions)):
+        if i == 0:
+            # Add the label only for the first point
+            plt.scatter(dfPredictions["Function Runtime (s)"][i], dfPredictions["Function Exec. Cost ($)"][i], marker='o', color='blue', label='Predicted Pareto Front values')
+        else:
+            if (configuration_predictions[i] in texts_check):
+                continue
+            plt.scatter(dfPredictions["Function Runtime (s)"][i], dfPredictions["Function Exec. Cost ($)"][i], marker='o', color='blue')
+
+        print("###########")
+        print(configuration_predictions[i])
+        print(config_dict)
+        print(config_dict.get(configuration_predictions[i]))
+        
+        texts.append(plt.text(dfPredictions["Function Runtime (s)"][i] + 0.0, dfPredictions["Function Exec. Cost ($)"][i], config_dict.get(configuration_predictions[i])))
+        texts_check.append(configuration_predictions[i])
+
+    #adjust_text(texts) # adjust text to minimize overlaps
+
+    points2 = sorted(zip(dfPredictions["Function Runtime (s)"], dfPredictions["Function Exec. Cost ($)"]), key=lambda point: point[1])
+
+    # Unpack your sorted points
+    x_sorted2, y_sorted2 = zip(*points2)
+
+    plt.plot(x_sorted2, y_sorted2)
+
     # Because of data contains the real values, it isn't supposed to run Pareto front
-    plt.scatter(paretoset_performance["Function Runtime (s)"], paretoset_performance["Function Exec. Cost ($)"], label='Real Pareto Front values')
-    plt.xlabel("Function Runtime (s)")
-    plt.ylabel("Function Exec. Cost ($)")
+    texts_real = [] # to store your annotations
+    texts_real_check = [] # to store your annotations
+
+    # For real values, paretoset_performance and configs
+    for i in range(len(paretoset_performance)):
+        if i == 0:
+            # Add the label only for the first point
+            plt.scatter(paretoset_performance["Function Runtime (s)"], paretoset_performance["Function Exec. Cost ($)"], color='red', label='Real Pareto Front values')
+        else:
+            if (configOrganized[i] in texts_real_check):
+                continue
+            plt.scatter(paretoset_performance["Function Runtime (s)"], paretoset_performance["Function Exec. Cost ($)"], color='red')
+        texts_real.append(plt.text(paretoset_performance["Function Runtime (s)"][i] + 0.0, paretoset_performance["Function Exec. Cost ($)"][i], config_dict.get(configOrganized[i])))
+        texts_real_check.append(configOrganized[i])
+        
+    print("!!!!!!#############")
+    print(config_dict)
+    print(configs)
+
+    print("!!!!!!!!!!!!!!!!!")
+    print(texts)
+    print(texts_real)
+    all_texts = texts + texts_real
+
+    adjust_text(all_texts) # adjust text to minimize overlaps
+
+    points = sorted(zip(paretoset_performance["Function Runtime (s)"], paretoset_performance["Function Exec. Cost ($)"]), key=lambda point: point[1])
+
+    # Unpack your sorted points
+    x_sorted, y_sorted = zip(*points)
 
     
+    plt.plot(x_sorted, y_sorted)
+    
+    # Set the limits for x and y axis after the plot is established
+    plt.xlim([0.15, 0.165])
+    plt.ylim([0.2*1e-6, 3.5*1e-6])
+
+    plt.xlabel("Function Execution Time")
+    plt.ylabel("Function Execution Cost")
+
     
     # Values from prediction
     #file_path = "./quality_model/" + functionName + ".txt"
     #df = pd.read_csv(file_path)
     
-    plt.scatter(dfPredictions["Function Runtime (s)"], dfPredictions["Function Exec. Cost ($)"], marker='o', color='red', label='Predicted Pareto Front values')
+    
+
 
     plt.legend()
 
@@ -341,6 +426,9 @@ def main():
 
     #plt.show()
 
+
+    with open("./quality_model/plots/" + functionName + ".txt", "w") as file:
+        file.write(str(config_dict))
 
 if __name__ == "__main__":
     main()

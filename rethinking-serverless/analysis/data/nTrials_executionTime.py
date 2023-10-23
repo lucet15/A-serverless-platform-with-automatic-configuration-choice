@@ -16,7 +16,7 @@ def main():
     trial_numbers = []
     execution_times = []
     
-    functionName = "s3"
+    functionName = "pigo-faceblur"
 
     folder_path = "./time/initSample_cost_time/"
 
@@ -47,16 +47,16 @@ def main():
 
     plt.figure(figsize=(5, 6))
     bars = plt.bar(trial_numbers, execution_times, width=2, align='center', alpha=0.7)
-    plt.xlabel('Number of Init Samples')
-    plt.ylabel('Execution Time (seconds)')
-    plt.title('Execution Time vs. Trials')
+    plt.xlabel('Number of Initial Samples')
+    plt.ylabel('Model Execution Time')
+    plt.title('Model Execution Time vs. Number of Initial Samples')
     plt.xticks(trial_numbers)
     plt.grid(axis='y', linestyle='--', alpha=0.7)
 
     for bar, time in zip(bars, execution_times):
         plt.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 0.05, f'{time:.2f}', ha='center', va='bottom')
 
-    plt.savefig("./time/initSample_cost_time/" + functionName + ".png")  # You can specify the desired file format (e.g., .png, .jpg, .pdf)
+    plt.savefig(folder_path + functionName + ".png")  # You can specify the desired file format (e.g., .png, .jpg, .pdf)
 
 
 

@@ -208,7 +208,7 @@ def main():
     # Run model
     print("Executing the main() function in create_model")
 
-    model: Models = create_model("./data/metrics", instance_types=instance_types, cpu_limits=CPU_LIMITS, memory_limits=MEMORY_LIMITS, function_name=functionName, data_name=functionInputName, n_trials=35, base_estimator="GP", seed=10, n_init_samples=5)
+    model: Models = create_model("./data/metrics", instance_types=instance_types, cpu_limits=CPU_LIMITS, memory_limits=MEMORY_LIMITS, function_name=functionName, data_name=functionInputName, n_trials=35, base_estimator="GP", seed=10, n_init_samples=15)
     
     print("Finished executing the main() function in create_model")
     predictions = model.get_all_config_predictions(function=functionName)
@@ -232,8 +232,7 @@ def main():
 
     print("paretoset_confis")
     print(paretoset_configs)
-    print("paretoset_metrics")
-    print(paretoset_metrics)
+    
 
 
 
@@ -249,32 +248,39 @@ def main():
     else:
         os.mkdir(directory)
 
-    with open(directory + "execution_time_5_initSamples_"+ functionName + ".txt", "w") as file:
+    # with open(directory + "execution_time_50_trials_"+ functionName + ".txt", "w") as file:
+    #     file.write(str(elapsed_time))
+    
+    with open(directory + "execution_time_15_initSamples_"+ functionName + ".txt", "w") as file:
         file.write(str(elapsed_time))
 
-    with open("./quality_model/" + functionName + ".txt", 'w') as f:
+    #with open("./quality_model/" + functionName + ".txt", 'w') as f:
 
     #with open("./data/metricsConfigurations" + functionName + "_predictions.txt", 'w') as f:
         # Write the column headers
-        f.write('paretoset_configs\tparetoset_metrics\n')
+        # f.write('paretoset_configs\tparetoset_metrics\n')
 
-        # Write the data
-        for configs, (index, metrics) in zip(paretoset_configs, paretoset_metrics.iterrows()):
-            config_str = ', '.join(configs) # Convert set to string
-            metrics_str = ', '.join(metrics.astype(str)) # Convert metrics to string
-            f.write(f'{config_str}\t{metrics_str}\n')
+        # # Write the data
+        # for configs, (index, metrics) in zip(paretoset_configs, paretoset_metrics.iterrows()):
+        #     config_str = ', '.join(configs) # Convert set to string
+        #     metrics_str = ', '.join(metrics.astype(str)) # Convert metrics to string
+        #     f.write(f'{config_str}\t{metrics_str}\n')
 
     
 
     # Prompt the user for input
+    print("paretoset_metrics")
+    print(paretoset_metrics)
     while True:
         try:
-            preference = eval(input("On a scale from 0 to 5, where 0 represents the maximum performance and 5 represents the minimum cost, please indicate your preference for the deployment of this function: "))
+            preference = eval(input("Please indicate your preference for the deployment of this function, selecting through the numbers in the left: "))
             if isinstance(preference, (int, float)):
                 # Check if the value is between 0 and 5 (inclusive)
-                if 0 <= preference <= 5:
+                if 0 <= preference <= len(paretoset_metrics) - 1:
                     index = paretoset_metrics.index[preference] # Get the index of the metrics, correspondent to the metrics array
                     specific_config = paretoset_configs[preference]
+
+                    print(specific_config)
 
                     break  # exit the loop
                 else:
